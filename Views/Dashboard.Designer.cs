@@ -28,19 +28,34 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.BtnLoadCustomerScreen = new System.Windows.Forms.Button();
             this.SuspendLayout();
+            // 
+            // BtnLoadCustomerScreen
+            // 
+            this.BtnLoadCustomerScreen.Location = new System.Drawing.Point(59, 61);
+            this.BtnLoadCustomerScreen.Name = "BtnLoadCustomerScreen";
+            this.BtnLoadCustomerScreen.Size = new System.Drawing.Size(75, 23);
+            this.BtnLoadCustomerScreen.TabIndex = 0;
+            this.BtnLoadCustomerScreen.Text = "Customers";
+            this.BtnLoadCustomerScreen.UseVisualStyleBackColor = true;
+            this.BtnLoadCustomerScreen.Click += new System.EventHandler(this.BtnLoadCustomerScreen_Click);
             // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.BtnLoadCustomerScreen);
             this.Name = "Dashboard";
             this.Text = "Dashboard";
+            this.Load += new System.EventHandler(this.Dashboard_Load);
             this.ResumeLayout(false);
 
         }
 
         #endregion
+
+        private Button BtnLoadCustomerScreen;
     }
 }
