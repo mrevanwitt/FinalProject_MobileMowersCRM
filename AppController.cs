@@ -8,28 +8,35 @@ using System.Threading.Tasks;
 
 namespace FinalProject_MobileMowersCRM
 {
+   
     public class AppController
     {
-        NavigationHelper nav = new NavigationHelper();
-        CustomerScreen customerScreen;
-        Dashboard dashboard;
+        private readonly NavigationHelper navHelpers;
+        private readonly DatabaseHelpers databaseHelpers;
+
+        private readonly CustomerScreen customerScreen;
+        private readonly Dashboard dashboard;
 
         public AppController()
         {
+            navHelpers = new NavigationHelper();
+            databaseHelpers = new DatabaseHelpers();
+
             customerScreen = new CustomerScreen(this);
             dashboard = new Dashboard(this);
 
+            databaseHelpers.ConnectDatabase();
             Application.Run(new Dashboard(this));
         }
 
         public void LoadCustomerScreen()
         {
-            nav.Load(customerScreen);
+            navHelpers.Load(customerScreen);
         }
 
         public void LoadDashboard()
         {
-            nav.Load(dashboard);
+            navHelpers.Load(dashboard);
         }
     }
 }
