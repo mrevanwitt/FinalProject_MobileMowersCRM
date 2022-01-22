@@ -29,23 +29,47 @@
         private void InitializeComponent()
         {
             this.BtnLoadCustomerScreen = new System.Windows.Forms.Button();
+            this.BtnInvoices = new System.Windows.Forms.Button();
+            this.BtnServices = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnLoadCustomerScreen
             // 
-            this.BtnLoadCustomerScreen.Location = new System.Drawing.Point(59, 61);
+            this.BtnLoadCustomerScreen.Location = new System.Drawing.Point(92, 12);
             this.BtnLoadCustomerScreen.Name = "BtnLoadCustomerScreen";
-            this.BtnLoadCustomerScreen.Size = new System.Drawing.Size(75, 23);
+            this.BtnLoadCustomerScreen.Size = new System.Drawing.Size(122, 45);
             this.BtnLoadCustomerScreen.TabIndex = 0;
             this.BtnLoadCustomerScreen.Text = "Customers";
             this.BtnLoadCustomerScreen.UseVisualStyleBackColor = true;
             this.BtnLoadCustomerScreen.Click += new System.EventHandler(this.BtnLoadCustomerScreen_Click);
             // 
+            // BtnInvoices
+            // 
+            this.BtnInvoices.Location = new System.Drawing.Point(92, 63);
+            this.BtnInvoices.Name = "BtnInvoices";
+            this.BtnInvoices.Size = new System.Drawing.Size(122, 45);
+            this.BtnInvoices.TabIndex = 1;
+            this.BtnInvoices.Text = "Invoices";
+            this.BtnInvoices.UseVisualStyleBackColor = true;
+            this.BtnInvoices.Click += new System.EventHandler(this.BtnInvoices_Click);
+            // 
+            // BtnServices
+            // 
+            this.BtnServices.Location = new System.Drawing.Point(92, 114);
+            this.BtnServices.Name = "BtnServices";
+            this.BtnServices.Size = new System.Drawing.Size(122, 45);
+            this.BtnServices.TabIndex = 2;
+            this.BtnServices.Text = "Services";
+            this.BtnServices.UseVisualStyleBackColor = true;
+            this.BtnServices.Click += new System.EventHandler(this.BtnServices_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(324, 223);
+            this.Controls.Add(this.BtnServices);
+            this.Controls.Add(this.BtnInvoices);
             this.Controls.Add(this.BtnLoadCustomerScreen);
             this.Name = "Dashboard";
             this.Text = "Dashboard";
@@ -57,5 +81,7 @@
         #endregion
 
         private Button BtnLoadCustomerScreen;
+        private Button BtnInvoices;
+        private Button BtnServices;
     }
 }

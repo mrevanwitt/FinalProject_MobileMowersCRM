@@ -14,16 +14,20 @@ namespace FinalProject_MobileMowersCRM
         private readonly NavigationHelper navHelpers;
         private readonly DatabaseHelpers databaseHelpers;
 
-        private readonly CustomerScreen customerScreen;
         private readonly Dashboard dashboard;
+        private readonly CustomerScreen customerScreen;
+        private readonly ServiceScreen serviceScreen;
+        private readonly InvoiceScreen invoiceScreen;
 
         public AppController()
         {
             navHelpers = new NavigationHelper();
             databaseHelpers = new DatabaseHelpers();
 
-            customerScreen = new CustomerScreen(this);
             dashboard = new Dashboard(this);
+            customerScreen = new CustomerScreen(this);
+            serviceScreen = new ServiceScreen(this);
+            invoiceScreen = new InvoiceScreen(this);
 
             databaseHelpers.ConnectDatabase();
             Application.Run(new Dashboard(this));
@@ -37,6 +41,16 @@ namespace FinalProject_MobileMowersCRM
         public void LoadDashboard()
         {
             navHelpers.Load(dashboard);
+        }
+
+        public void LoadServiceScreen()
+        {
+            navHelpers.Load(serviceScreen);
+        }
+
+        public void LoadInvoices()
+        {
+            navHelpers.Load(invoiceScreen);
         }
     }
 }
