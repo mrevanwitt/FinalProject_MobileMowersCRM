@@ -19,7 +19,7 @@ namespace FinalProject_MobileMowersCRM.Views
             InitializeComponent();
         }
 
-        private void BtnDashboardScreen_Click(object sender, EventArgs e)
+        private void BtnDashboard_Click(object sender, EventArgs e)
         {
             Hide();
             _appController.LoadDashboard();

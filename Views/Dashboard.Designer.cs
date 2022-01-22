@@ -31,11 +31,12 @@
             this.BtnLoadCustomerScreen = new System.Windows.Forms.Button();
             this.BtnInvoices = new System.Windows.Forms.Button();
             this.BtnServices = new System.Windows.Forms.Button();
+            this.BtnReportScreen = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // BtnLoadCustomerScreen
             // 
-            this.BtnLoadCustomerScreen.Location = new System.Drawing.Point(92, 12);
+            this.BtnLoadCustomerScreen.Location = new System.Drawing.Point(76, 12);
             this.BtnLoadCustomerScreen.Name = "BtnLoadCustomerScreen";
             this.BtnLoadCustomerScreen.Size = new System.Drawing.Size(122, 45);
             this.BtnLoadCustomerScreen.TabIndex = 0;
@@ -45,7 +46,7 @@
             // 
             // BtnInvoices
             // 
-            this.BtnInvoices.Location = new System.Drawing.Point(92, 63);
+            this.BtnInvoices.Location = new System.Drawing.Point(76, 63);
             this.BtnInvoices.Name = "BtnInvoices";
             this.BtnInvoices.Size = new System.Drawing.Size(122, 45);
             this.BtnInvoices.TabIndex = 1;
@@ -55,7 +56,7 @@
             // 
             // BtnServices
             // 
-            this.BtnServices.Location = new System.Drawing.Point(92, 114);
+            this.BtnServices.Location = new System.Drawing.Point(76, 114);
             this.BtnServices.Name = "BtnServices";
             this.BtnServices.Size = new System.Drawing.Size(122, 45);
             this.BtnServices.TabIndex = 2;
@@ -63,11 +64,22 @@
             this.BtnServices.UseVisualStyleBackColor = true;
             this.BtnServices.Click += new System.EventHandler(this.BtnServices_Click);
             // 
+            // BtnReportScreen
+            // 
+            this.BtnReportScreen.Location = new System.Drawing.Point(76, 165);
+            this.BtnReportScreen.Name = "BtnReportScreen";
+            this.BtnReportScreen.Size = new System.Drawing.Size(122, 45);
+            this.BtnReportScreen.TabIndex = 3;
+            this.BtnReportScreen.Text = "Reports";
+            this.BtnReportScreen.UseVisualStyleBackColor = true;
+            this.BtnReportScreen.Click += new System.EventHandler(this.BtnReportScreen_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(324, 223);
+            this.ClientSize = new System.Drawing.Size(276, 268);
+            this.Controls.Add(this.BtnReportScreen);
             this.Controls.Add(this.BtnServices);
             this.Controls.Add(this.BtnInvoices);
             this.Controls.Add(this.BtnLoadCustomerScreen);
@@ -83,5 +95,6 @@
         private Button BtnLoadCustomerScreen;
         private Button BtnInvoices;
         private Button BtnServices;
+        private Button BtnReportScreen;
     }
 }

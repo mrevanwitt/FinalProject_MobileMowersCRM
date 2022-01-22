@@ -23,13 +23,19 @@ namespace FinalProject_MobileMowersCRM
         private void BtnInvoices_Click(object sender, EventArgs e)
         {
             Hide();
-            _appController.LoadInvoices();
+            _appController.LoadInvoiceScreen();
         }
 
         private void BtnServices_Click(object sender, EventArgs e)
         {
             Hide();
             _appController.LoadServiceScreen();
+        }
+
+        private void BtnReportScreen_Click(object sender, EventArgs e)
+        {
+            Hide();
+            _appController.LoadReportScreen();
         }
     }
 }

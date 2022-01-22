@@ -18,5 +18,11 @@ namespace FinalProject_MobileMowersCRM.Views
             _appController = appController;
             InitializeComponent();
         }
+
+        private void BtnDashboard_Click(object sender, EventArgs e)
+        {
+            Hide();
+            _appController.LoadDashboard();
+        }
     }
 }

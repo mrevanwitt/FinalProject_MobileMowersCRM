@@ -10,13 +10,18 @@ using System.Windows.Forms;
 
 namespace FinalProject_MobileMowersCRM.Views
 {
-    public partial class ServiceScreen : Form
+    public partial class ReportScreen : Form
     {
-        private AppController _appController;
-        public ServiceScreen(AppController appController)
+        private readonly AppController _appController;
+        public ReportScreen(AppController appController)
         {
             _appController = appController;
             InitializeComponent();
+        }
+
+        private void Reports_Load(object sender, EventArgs e)
+        {
+
         }
 
         private void BtnDashboard_Click(object sender, EventArgs e)
