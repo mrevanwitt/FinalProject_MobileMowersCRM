@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinalProject_MobileMowersCRM.Models;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -24,5 +25,6 @@ namespace FinalProject_MobileMowersCRM.Views
             Hide();
             _appController.LoadDashboard();
         }
+
     }
 }
