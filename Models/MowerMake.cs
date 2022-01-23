@@ -6,11 +6,9 @@ using System.Threading.Tasks;
 
 namespace FinalProject_MobileMowersCRM.Models
 {
-    internal class Mower
+    internal class MowerMake
     {
-        public int MowerId { get; set; }
         public int MowerMakeId { get; set; }
-        public string? Color { get; set; }
-        public string? Description { get; set; }
+        public string? MakeName { get; set; }
     }
 }
