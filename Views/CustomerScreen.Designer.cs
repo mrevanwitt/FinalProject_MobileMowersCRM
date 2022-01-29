@@ -72,6 +72,7 @@
             this.BtnAddNewCustomer.TabIndex = 8;
             this.BtnAddNewCustomer.Text = "Add";
             this.BtnAddNewCustomer.UseVisualStyleBackColor = true;
+            this.BtnAddNewCustomer.Click += new System.EventHandler(this.BtnAddNewCustomer_Click);
             // 
             // DataGridViewCustomers
             // 

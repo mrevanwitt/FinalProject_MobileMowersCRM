@@ -1,7 +1,9 @@
 ﻿using FinalProject_MobileMowersCRM.Helpers;
+using FinalProject_MobileMowersCRM.Models;
 using FinalProject_MobileMowersCRM.Views;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -58,6 +60,16 @@ namespace FinalProject_MobileMowersCRM
         public void LoadReportScreen()
         {
             navHelpers.Load(reportScreen);
+        }
+
+        public void AddNewCustomer(Customer customer)
+        {
+            databaseHelpers.AddCusomter(customer);
+        }
+
+        public List<Customer> GetAllCustomers()
+        {
+            return databaseHelpers.GetAllCustomers();
         }
     }
 }
