@@ -8,6 +8,8 @@ namespace FinalProject_MobileMowersCRM.Models
 {
     internal class ServiceToInvoice
     {
-
+        public int ServiceToInvoiceId { get; set; }
+        public int InvoiceId { get; set; }
+        public int ServiceId { get; set; }
     }
 }

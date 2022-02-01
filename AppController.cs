@@ -18,6 +18,7 @@ namespace FinalProject_MobileMowersCRM
 
         private readonly Dashboard dashboard;
         private readonly CustomerScreen customerScreen;
+        private readonly AddUpdateCustomerScreen addUpdateCustomerScreen;
         private readonly ServiceScreen serviceScreen;
         private readonly InvoiceScreen invoiceScreen;
         private readonly ReportScreen reportScreen;
@@ -29,6 +30,7 @@ namespace FinalProject_MobileMowersCRM
 
             dashboard = new Dashboard(this);
             customerScreen = new CustomerScreen(this);
+            addUpdateCustomerScreen  = new AddUpdateCustomerScreen(this);
             serviceScreen = new ServiceScreen(this);
             invoiceScreen = new InvoiceScreen(this);
             reportScreen = new ReportScreen(this); 
@@ -39,7 +41,12 @@ namespace FinalProject_MobileMowersCRM
 
         public void LoadCustomerScreen()
         {
-            navHelpers.Load(customerScreen);
+            customerScreen.Show();
+        }
+
+        public void LoadAddUpdateCustomerScreen()
+        {
+            navHelpers.Load(addUpdateCustomerScreen);
         }
 
         public void LoadDashboard()

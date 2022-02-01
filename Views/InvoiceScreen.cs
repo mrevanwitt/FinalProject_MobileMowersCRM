@@ -26,5 +26,9 @@ namespace FinalProject_MobileMowersCRM.Views
             _appController.LoadDashboard();
         }
 
+        private void BtnAddNewInvoice_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }

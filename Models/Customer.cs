@@ -11,8 +11,6 @@ namespace FinalProject_MobileMowersCRM.Models
     {
         [PrimaryKey, AutoIncrement]
         public int CustomerID { get; set; }
-        public string? Username { get; set; }
-        public string? Password { get; set; }
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
         public int PhoneNumber { get; set; }

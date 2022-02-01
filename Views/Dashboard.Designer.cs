@@ -28,21 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.BtnLoadCustomerScreen = new System.Windows.Forms.Button();
             this.BtnInvoices = new System.Windows.Forms.Button();
             this.BtnServices = new System.Windows.Forms.Button();
             this.BtnReportScreen = new System.Windows.Forms.Button();
+            this.BtnLoadCustomerScreen = new System.Windows.Forms.Button();
             this.SuspendLayout();
-            // 
-            // BtnLoadCustomerScreen
-            // 
-            this.BtnLoadCustomerScreen.Location = new System.Drawing.Point(76, 12);
-            this.BtnLoadCustomerScreen.Name = "BtnLoadCustomerScreen";
-            this.BtnLoadCustomerScreen.Size = new System.Drawing.Size(122, 45);
-            this.BtnLoadCustomerScreen.TabIndex = 0;
-            this.BtnLoadCustomerScreen.Text = "Customers";
-            this.BtnLoadCustomerScreen.UseVisualStyleBackColor = true;
-            this.BtnLoadCustomerScreen.Click += new System.EventHandler(this.BtnLoadCustomerScreen_Click);
             // 
             // BtnInvoices
             // 
@@ -74,6 +64,16 @@
             this.BtnReportScreen.UseVisualStyleBackColor = true;
             this.BtnReportScreen.Click += new System.EventHandler(this.BtnReportScreen_Click);
             // 
+            // BtnLoadCustomerScreen
+            // 
+            this.BtnLoadCustomerScreen.Location = new System.Drawing.Point(76, 12);
+            this.BtnLoadCustomerScreen.Name = "BtnLoadCustomerScreen";
+            this.BtnLoadCustomerScreen.Size = new System.Drawing.Size(122, 45);
+            this.BtnLoadCustomerScreen.TabIndex = 0;
+            this.BtnLoadCustomerScreen.Text = "Customers";
+            this.BtnLoadCustomerScreen.UseVisualStyleBackColor = true;
+            this.BtnLoadCustomerScreen.Click += new System.EventHandler(this.BtnLoadCustomerScreen_Click);
+            // 
             // Dashboard
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
@@ -91,10 +91,9 @@
         }
 
         #endregion
-
-        private Button BtnLoadCustomerScreen;
         private Button BtnInvoices;
         private Button BtnServices;
         private Button BtnReportScreen;
+        private Button BtnLoadCustomerScreen;
     }
 }

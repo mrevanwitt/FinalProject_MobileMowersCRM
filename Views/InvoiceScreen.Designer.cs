@@ -53,6 +53,7 @@
             this.BtnAddNewInvoice.TabIndex = 3;
             this.BtnAddNewInvoice.Text = "Add";
             this.BtnAddNewInvoice.UseVisualStyleBackColor = true;
+            this.BtnAddNewInvoice.Click += new System.EventHandler(this.BtnAddNewInvoice_Click);
             // 
             // BtnDeleteInvoice
             // 
