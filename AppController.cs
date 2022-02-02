@@ -81,9 +81,9 @@ namespace FinalProject_MobileMowersCRM
             databaseHelpers.AddCusomter(customer);
         }
 
-        public int AddNewInvoice(Invoice invoice)
+        public void AddNewInvoice(Invoice invoice)
         {
-            return databaseHelpers.AddInvoice(invoice);
+            databaseHelpers.AddInvoice(invoice);
         }
 
         public void AddnewServiceToInvoice(ServiceToInvoice serviceToInvoice)

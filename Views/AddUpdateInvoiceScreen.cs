@@ -43,7 +43,7 @@ namespace FinalProject_MobileMowersCRM.Views
                 CustomerId = _selectedCustomerId,
                 DateCreated = DateTime.Now.ToString()
             };
-            var invoiceId = _appController.AddNewInvoice(invoice);
+            _appController.AddNewInvoice(invoice);
 
             foreach (var checkbox in ListOfCheckboxes)
             {
@@ -51,8 +51,8 @@ namespace FinalProject_MobileMowersCRM.Views
                 {
                     var serviceToInvoice = new ServiceToInvoice()
                     {
-                        InvoiceId = invoiceId,
-                        ServiceId = GetServiceId(checkbox.Name)
+                        InvoiceId = invoice.InvoiceID,
+                        ServiceId = GetServiceId(checkbox.Text)
                     };
                     _appController.AddnewServiceToInvoice(serviceToInvoice);
                 }
@@ -68,6 +68,7 @@ namespace FinalProject_MobileMowersCRM.Views
                 if (listOfServices[i].ServiceName == name)
                 {
                     id = listOfServices[i].ServiceId;
+                    break;
                 }
             }
             return id;

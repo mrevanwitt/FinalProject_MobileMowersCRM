@@ -62,15 +62,23 @@ namespace FinalProject_MobileMowersCRM.Helpers
 
         #region Invoice
 
-        public int AddInvoice(Invoice invoice)
+        public void AddInvoice(Invoice invoice)
         {
-            return db.Insert(invoice);
+            db.Insert(invoice);
+
+            //var invoices = GetAllInvoices();
+            //return invoices[invoices.Count-1].InvoiceID;
+        }
+
+        public List<Invoice> GetAllInvoices()
+        {
+            return SQLiteNetExtensions.Extensions.ReadOperations.GetAllWithChildren<Invoice>(db);
         }
         #endregion
 
         #region Service To Invoice
 
-        public void AddnewServiceToInvoice(ServiceToInvoice serviceToInvoice)
+        public void AddServiceToInvoice(ServiceToInvoice serviceToInvoice)
         {
             db.Insert(serviceToInvoice);
         }

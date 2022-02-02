@@ -48,7 +48,7 @@ namespace FinalProject_MobileMowersCRM.Views
                 {
                     FirstName = TxtBoxFirstName.Text,
                     LastName = TxtBoxLastName.Text,
-                    PhoneNumber = Convert.ToInt32(TxtBoxPhone.Text),
+                    PhoneNumber = TxtBoxPhone.Text,
                     Email = TxtBoxEmail.Text,
                     Address1 = TxtBoxAddress1.Text,
                     Address2 = TxtBoxAddress2.Text,
@@ -128,11 +128,6 @@ namespace FinalProject_MobileMowersCRM.Views
         private void TxtBoxPhone_TextChanged(object sender, EventArgs e)
         {
             _phoneValidation = ValidateText(TxtBoxPhone);
-            if (System.Text.RegularExpressions.Regex.IsMatch(TxtBoxPhone.Text, "[^0-9]"))
-            {
-                MessageBox.Show("Please enter only numbers.");
-                TxtBoxPhone.Text = TxtBoxPhone.Text.Remove(TxtBoxPhone.Text.Length - 1);
-            }
         }
 
         private void TxtBoxEmail_TextChanged(object sender, EventArgs e)
