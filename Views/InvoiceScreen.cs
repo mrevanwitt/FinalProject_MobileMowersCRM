@@ -28,7 +28,8 @@ namespace FinalProject_MobileMowersCRM.Views
 
         private void BtnAddNewInvoice_Click(object sender, EventArgs e)
         {
-
+            Hide();
+            _appController.LoadAddUpdateInvoiceScreen();
         }
     }
 }

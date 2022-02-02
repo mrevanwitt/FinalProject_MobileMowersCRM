@@ -6,11 +6,10 @@ using System.Threading.Tasks;
 
 namespace FinalProject_MobileMowersCRM.Models
 {
-    internal class Service
+    public class Service
     {
         public int ServiceId { get; set; }
-        public int ServiceName { get; set; }
-        public decimal ServiceAmount { get; set; }
-        public string? ServiceDescription { get; set; }
+        public string ServiceName { get; set; }
+        public int ServiceAmount { get; set; }
     }
 }

@@ -1,4 +1,5 @@
-﻿using SQLiteNetExtensions.Attributes;
+﻿using SQLite;
+using SQLiteNetExtensions.Attributes;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,15 +8,14 @@ using System.Threading.Tasks;
 
 namespace FinalProject_MobileMowersCRM.Models
 {
-    internal class Invoice
+    public class Invoice
     {
+        [PrimaryKey, AutoIncrement]
         public int InvoiceID { get; set; }
         [ForeignKey(typeof(Customer))]
         public int CustomerId { get; set; }
         public decimal InvoiceAmount { get; set; }
-        public decimal InvoiceTaxAmount { get; set; }
-        public DateTime DatePaid { get; set; }
-        public DateTime DateCreated { get; set; }
-        public DateTime DateDue { get; set; }
+        public string DatePaid { get; set; }
+        public string DateCreated { get; set; }
     }
 }

@@ -9,6 +9,11 @@ namespace FinalProject_MobileMowersCRM
             InitializeComponent();
         }
 
+        public new void Show()
+        {
+            base.Show();
+        }
+
         private void Dashboard_Load(object sender, EventArgs e)
         {
 

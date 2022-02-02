@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject_MobileMowersCRM.Models
 {
-    internal class ServiceToInvoice
+    public class ServiceToInvoice
     {
         public int ServiceToInvoiceId { get; set; }
         public int InvoiceId { get; set; }

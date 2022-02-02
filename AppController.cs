@@ -21,6 +21,7 @@ namespace FinalProject_MobileMowersCRM
         private readonly AddUpdateCustomerScreen addUpdateCustomerScreen;
         private readonly ServiceScreen serviceScreen;
         private readonly InvoiceScreen invoiceScreen;
+        private readonly AddUpdateInvoiceScreen addUpdateInvoiceScreen;
         private readonly ReportScreen reportScreen;
 
         public AppController()
@@ -33,6 +34,7 @@ namespace FinalProject_MobileMowersCRM
             addUpdateCustomerScreen  = new AddUpdateCustomerScreen(this);
             serviceScreen = new ServiceScreen(this);
             invoiceScreen = new InvoiceScreen(this);
+            addUpdateInvoiceScreen = new AddUpdateInvoiceScreen(this);
             reportScreen = new ReportScreen(this); 
 
             databaseHelpers.ConnectDatabase();
@@ -46,27 +48,32 @@ namespace FinalProject_MobileMowersCRM
 
         public void LoadAddUpdateCustomerScreen()
         {
-            navHelpers.Load(addUpdateCustomerScreen);
+            addUpdateCustomerScreen.Show();
         }
 
         public void LoadDashboard()
         {
-            navHelpers.Load(dashboard);
+            dashboard.Show();
         }
 
         public void LoadServiceScreen()
         {
-            navHelpers.Load(serviceScreen);
+            serviceScreen.Show();
         }
 
         public void LoadInvoiceScreen()
         {
-            navHelpers.Load(invoiceScreen);
+            invoiceScreen.Show();
         }
 
         public void LoadReportScreen()
         {
-            navHelpers.Load(reportScreen);
+            reportScreen.Show();
+        }
+
+        public void LoadAddUpdateInvoiceScreen()
+        {
+            addUpdateInvoiceScreen.Show();
         }
 
         public void AddNewCustomer(Customer customer)
@@ -74,9 +81,24 @@ namespace FinalProject_MobileMowersCRM
             databaseHelpers.AddCusomter(customer);
         }
 
+        public int AddNewInvoice(Invoice invoice)
+        {
+            return databaseHelpers.AddInvoice(invoice);
+        }
+
+        public void AddnewServiceToInvoice(ServiceToInvoice serviceToInvoice)
+        {
+            databaseHelpers.AddServiceToInvoice(serviceToInvoice);
+        }
+
         public List<Customer> GetAllCustomers()
         {
             return databaseHelpers.GetAllCustomers();
+        }
+
+        public List<Service> GetAllServices()
+        {
+            return databaseHelpers.GetAllServices();
         }
     }
 }
