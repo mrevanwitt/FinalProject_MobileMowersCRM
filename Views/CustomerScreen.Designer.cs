@@ -54,6 +54,7 @@
             this.BtnDeleteCustomer.TabIndex = 10;
             this.BtnDeleteCustomer.Text = "Delete";
             this.BtnDeleteCustomer.UseVisualStyleBackColor = true;
+            this.BtnDeleteCustomer.Click += new System.EventHandler(this.BtnDeleteCustomer_Click);
             // 
             // BtnUpdateCustomer
             // 
@@ -63,6 +64,7 @@
             this.BtnUpdateCustomer.TabIndex = 9;
             this.BtnUpdateCustomer.Text = "Update";
             this.BtnUpdateCustomer.UseVisualStyleBackColor = true;
+            this.BtnUpdateCustomer.Click += new System.EventHandler(this.BtnUpdateCustomer_Click);
             // 
             // BtnAddNewCustomer
             // 
@@ -76,10 +78,14 @@
             // 
             // DataGridViewCustomers
             // 
+            this.DataGridViewCustomers.AllowUserToDeleteRows = false;
             this.DataGridViewCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewCustomers.Location = new System.Drawing.Point(12, 80);
+            this.DataGridViewCustomers.MultiSelect = false;
             this.DataGridViewCustomers.Name = "DataGridViewCustomers";
+            this.DataGridViewCustomers.RowHeadersVisible = false;
             this.DataGridViewCustomers.RowTemplate.Height = 25;
+            this.DataGridViewCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewCustomers.Size = new System.Drawing.Size(776, 297);
             this.DataGridViewCustomers.TabIndex = 7;
             // 

@@ -15,22 +15,30 @@ namespace FinalProject_MobileMowersCRM.Views
     {
         private AppController _appController;
         private int _selectedCustomerId;
+        private bool _isUpdating;
+
         private List<Customer> listOfCustomers;
         private List<Service> listOfServices;
         private List<CheckBox> ListOfCheckboxes;
         private List<Label> ListOfLabels;
         private int total;
+
         public AddUpdateInvoiceScreen(AppController appController)
         {
             _appController = appController;
             InitializeComponent();
         }
 
-        public new void Show()
+        //public new void Show(bool isUpdaing)
+        //{
+        //    base.Show();
+        //}
+
+        public void Show(bool isUpdating)
         {
             LoadComponents();
-            
-            base.Show();
+            _isUpdating = isUpdating;
+            Show();
         }
 
         private void BtnAddNewInvoice_Click(object sender, EventArgs e)
@@ -134,6 +142,11 @@ namespace FinalProject_MobileMowersCRM.Views
         public void UpdateTotal()
         {
             TextBoxTotalAmount.Text = total.ToString();
+        }
+
+        private void AddUpdateInvoiceScreen_Load(object sender, EventArgs e)
+        {
+
         }
     }
 }

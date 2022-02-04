@@ -14,6 +14,8 @@ namespace FinalProject_MobileMowersCRM.Views
     public partial class AddUpdateCustomerScreen : Form
     {
         private AppController _appController;
+        private bool _isUpdating;
+        private int _updatedCustomerId;
 
         private bool _firstNameValidation;
         private bool _lastNameValidation;
@@ -30,10 +32,23 @@ namespace FinalProject_MobileMowersCRM.Views
             InitializeComponent();
         }
 
-        protected override void OnShown(EventArgs e) 
-        { 
-            base.OnShown(e);
+        public void Show(bool isUpdating)
+        {
+            _isUpdating = isUpdating;
+            if (isUpdating)
+            {
+                BtnAddUpdateCustomer.Text = "Save";
+            } else
+            {
+                BtnAddUpdateCustomer.Text = "Add";
+            }
+            Show();
         }
+
+        //protected override void OnShown(EventArgs e) 
+        //{ 
+        //    base.OnShown(e);
+        //}
 
         private void AddUpdateCustomerScreen_Load(object sender, EventArgs e)
         {
@@ -56,7 +71,15 @@ namespace FinalProject_MobileMowersCRM.Views
                     State = TxtBoxState.Text,
                     AreaCode = Convert.ToInt32(TxtBoxAreaCode.Text)
                 };
-                _appController.AddNewCustomer(customer);
+                if (_isUpdating)
+                {
+                    customer.CustomerID = _updatedCustomerId;
+                    _appController.UpdateCustomer(customer);
+                }
+                else
+                {  
+                    _appController.AddNewCustomer(customer);
+                }
                 CleanUp();
             }
             else
@@ -65,6 +88,7 @@ namespace FinalProject_MobileMowersCRM.Views
                 MessageBox.Show("Plesae fill out the required feilds.");
             }
         }
+
 
         private void BtnCancel_Click(object sender, EventArgs e)
         {
@@ -179,6 +203,19 @@ namespace FinalProject_MobileMowersCRM.Views
             ClearFields();
             Hide();
             _appController.LoadCustomerScreen();
+        }
+        public void PopulateCustomer(Customer customer)
+        {
+            _updatedCustomerId = customer.CustomerID;
+            TxtBoxFirstName.Text = customer.FirstName;
+            TxtBoxLastName.Text = customer.LastName;
+            TxtBoxEmail.Text = customer.Email;
+            TxtBoxPhone.Text = customer.PhoneNumber;
+            TxtBoxCity.Text = customer.City;
+            TxtBoxAddress1.Text = customer.Address1;
+            TxtBoxAddress2.Text = customer.Address2;
+            TxtBoxState.Text = customer.State;
+            TxtBoxAreaCode.Text = customer.AreaCode.ToString();
         }
     }
 }

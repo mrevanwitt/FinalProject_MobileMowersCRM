@@ -35,7 +35,20 @@ namespace FinalProject_MobileMowersCRM.Views
         private void BtnAddNewCustomer_Click(object sender, EventArgs e)
         {
             Hide();
-            _appController.LoadAddUpdateCustomerScreen();
+            _appController.LoadAddUpdateCustomerScreen(false);
+        }
+
+        private void BtnUpdateCustomer_Click(object sender, EventArgs e)
+        {
+            var customerId = DataGridViewCustomers.SelectedCells[0].EditedFormattedValue.ToString();
+            _appController.LoadCustomerScreenWithCustomerId(customerId);
+            Hide();
+            
+        }
+
+        private void BtnDeleteCustomer_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

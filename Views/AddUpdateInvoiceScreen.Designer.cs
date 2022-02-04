@@ -160,6 +160,7 @@
             this.Controls.Add(this.DropDownCustomers);
             this.Name = "AddUpdateInvoiceScreen";
             this.Text = "AddUpdateInvoiceScreen";
+            this.Load += new System.EventHandler(this.AddUpdateInvoiceScreen_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

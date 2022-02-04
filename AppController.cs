@@ -41,14 +41,22 @@ namespace FinalProject_MobileMowersCRM
             Application.Run(new Dashboard(this));
         }
 
+        public void LoadCustomerScreenWithCustomerId(string customerId)
+        {
+            var isUpdating = true;
+            addUpdateCustomerScreen.Show(isUpdating);
+            var customer = databaseHelpers.GetCustomerById(Convert.ToInt32(customerId));
+            addUpdateCustomerScreen.PopulateCustomer(customer);
+        }
+
         public void LoadCustomerScreen()
         {
             customerScreen.Show();
         }
 
-        public void LoadAddUpdateCustomerScreen()
+        public void LoadAddUpdateCustomerScreen(bool isUpdating)
         {
-            addUpdateCustomerScreen.Show();
+            addUpdateCustomerScreen.Show(isUpdating);
         }
 
         public void LoadDashboard()
@@ -79,6 +87,16 @@ namespace FinalProject_MobileMowersCRM
         public void AddNewCustomer(Customer customer)
         {
             databaseHelpers.AddCusomter(customer);
+        }
+
+        public void UpdateCustomer(Customer customer)
+        {
+            databaseHelpers.UpdateCustomer(customer);
+        }
+
+        public void DeleteCustomer(Customer customer)
+        {
+            databaseHelpers.DeleteCustomer(customer);
         }
 
         public void AddNewInvoice(Invoice invoice)

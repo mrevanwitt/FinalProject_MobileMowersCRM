@@ -28,17 +28,18 @@ namespace FinalProject_MobileMowersCRM.Helpers
 
         public void UpdateCustomer(Customer customer)
         {
-
+            db.Update(customer);
         }
 
         public void DeleteCustomer(Customer customer)
         {
-
+            db.Delete(customer);
         }
 
         public Customer GetCustomerById(int customerId)
         {
-            return new Customer();
+            string query = $"SELECT * FROM Customer WHERE Customer.CustomerId = {customerId}";
+            return db.Query<Customer>(query).FirstOrDefault();
         }
 
         public List<Customer> GetAllCustomers()
