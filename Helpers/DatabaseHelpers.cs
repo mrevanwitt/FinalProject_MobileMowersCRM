@@ -44,9 +44,7 @@ namespace FinalProject_MobileMowersCRM.Helpers
 
         public List<Customer> GetAllCustomers()
         {
-
             return SQLiteNetExtensions.Extensions.ReadOperations.GetAllWithChildren<Customer>(db);
-
         }
 
         #endregion
@@ -59,6 +57,12 @@ namespace FinalProject_MobileMowersCRM.Helpers
             return SQLiteNetExtensions.Extensions.ReadOperations.GetAllWithChildren<Service>(db);
         }
 
+        public List<ServiceToInvoice> GetAllServicesByInvoiceId(int invoiceId)
+        {
+            string query = $"SELECT * FROM ServiceToInvoice WHERE InvoiceId = {invoiceId}";
+            return db.Query<ServiceToInvoice>(query).ToList();
+        }
+
         #endregion
 
         #region Invoice
@@ -66,9 +70,12 @@ namespace FinalProject_MobileMowersCRM.Helpers
         public void AddInvoice(Invoice invoice)
         {
             db.Insert(invoice);
+        }
 
-            //var invoices = GetAllInvoices();
-            //return invoices[invoices.Count-1].InvoiceID;
+        public Invoice GetInvoiceById(int invoiceId)
+        {
+            string query = $"SELECT * FROM Invoice WHERE Invoice.InvoiceId = {invoiceId}";
+            return db.Query<Invoice>(query).FirstOrDefault();
         }
 
         public List<Invoice> GetAllInvoices()

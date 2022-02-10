@@ -41,14 +41,6 @@ namespace FinalProject_MobileMowersCRM
             Application.Run(new Dashboard(this));
         }
 
-        public void LoadCustomerScreenWithCustomerId(string customerId)
-        {
-            var isUpdating = true;
-            addUpdateCustomerScreen.Show(isUpdating);
-            var customer = databaseHelpers.GetCustomerById(Convert.ToInt32(customerId));
-            addUpdateCustomerScreen.PopulateCustomer(customer);
-        }
-
         public void LoadCustomerScreen()
         {
             customerScreen.Show();
@@ -57,6 +49,14 @@ namespace FinalProject_MobileMowersCRM
         public void LoadAddUpdateCustomerScreen(bool isUpdating)
         {
             addUpdateCustomerScreen.Show(isUpdating);
+        }
+
+        public void LoadAddUpdateCustomerScreenWithCustomerId(string customerId)
+        {
+            var isUpdating = true;
+            addUpdateCustomerScreen.Show(isUpdating);
+            var customer = databaseHelpers.GetCustomerById(Convert.ToInt32(customerId));
+            addUpdateCustomerScreen.PopulateCustomer(customer);
         }
 
         public void LoadDashboard()
@@ -79,14 +79,29 @@ namespace FinalProject_MobileMowersCRM
             reportScreen.Show();
         }
 
-        public void LoadAddUpdateInvoiceScreen()
+        public void LoadAddUpdateInvoiceScreen(bool isUpdaing)
         {
-            addUpdateInvoiceScreen.Show();
+            addUpdateInvoiceScreen.Show(isUpdaing);
+        }
+
+        public void LoadAddUpdateInvoiceScreenWithInvoiceId(string invoiceId)
+        {
+            var isUpdating = true;
+            addUpdateInvoiceScreen.Show(isUpdating);
+            var invoice = databaseHelpers.GetInvoiceById(Convert.ToInt32(invoiceId));
+            var customer = databaseHelpers.GetCustomerById(invoice.CustomerId);
+            var listOfInvoiceToServices = databaseHelpers.GetAllServicesByInvoiceId(Convert.ToInt32(invoiceId));
+            addUpdateInvoiceScreen.PopulateInvoice(invoice, listOfInvoiceToServices, customer);
         }
 
         public void AddNewCustomer(Customer customer)
         {
             databaseHelpers.AddCusomter(customer);
+        }
+
+        public Customer GetCustomerByCustomerId(int customerId)
+        {
+            return databaseHelpers.GetCustomerById(customerId);
         }
 
         public void UpdateCustomer(Customer customer)
@@ -117,6 +132,11 @@ namespace FinalProject_MobileMowersCRM
         public List<Service> GetAllServices()
         {
             return databaseHelpers.GetAllServices();
+        }
+
+        public List<Invoice> GetAllInvoices()
+        {
+            return databaseHelpers.GetAllInvoices();
         }
     }
 }

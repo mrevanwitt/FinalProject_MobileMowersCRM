@@ -20,6 +20,12 @@ namespace FinalProject_MobileMowersCRM.Views
             InitializeComponent();
         }
 
+        public new void Show()
+        {
+            DataGridViewInvoices.DataSource = _appController.GetAllInvoices();
+            base.Show();
+        }
+
         private void BtnDashboard_Click(object sender, EventArgs e)
         {
             Hide();
@@ -29,7 +35,14 @@ namespace FinalProject_MobileMowersCRM.Views
         private void BtnAddNewInvoice_Click(object sender, EventArgs e)
         {
             Hide();
-            _appController.LoadAddUpdateInvoiceScreen();
+            _appController.LoadAddUpdateInvoiceScreen(false);
+        }
+
+        private void BtnUpdateInvoice_Click(object sender, EventArgs e)
+        {
+            var invoiceId = DataGridViewInvoices.SelectedCells[0].EditedFormattedValue.ToString();
+            _appController.LoadAddUpdateInvoiceScreenWithInvoiceId(invoiceId);
+            Hide();
         }
     }
 }

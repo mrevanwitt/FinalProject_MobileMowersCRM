@@ -16,6 +16,7 @@ namespace FinalProject_MobileMowersCRM.Views
         private AppController _appController;
         private int _selectedCustomerId;
         private bool _isUpdating;
+        private Customer _currentCustomer;
 
         private List<Customer> listOfCustomers;
         private List<Service> listOfServices;
@@ -65,7 +66,11 @@ namespace FinalProject_MobileMowersCRM.Views
                     _appController.AddnewServiceToInvoice(serviceToInvoice);
                 }
             }
+        }
 
+        private void BtnCancel_Click(object sender, EventArgs e)
+        {
+            CleanUp();
         }
 
         public int GetServiceId(string name)
@@ -110,14 +115,14 @@ namespace FinalProject_MobileMowersCRM.Views
                 box.Text = service.ServiceName;
                 box.Tag = service.ServiceAmount;
                 box.AutoSize = true;
-                box.Location = new Point(33, 143 + (i * 40));
+                box.Location = new Point(33, 275 + (i * 40));
                 box.CheckedChanged += new EventHandler(CheckBox_Checked);
                 Controls.Add(box);
 
                 var lbl = new Label();
                 lbl.Text = DisplayAmount(service.ServiceAmount.ToString());
                 lbl.AutoSize = true;
-                lbl.Location = new Point(257, 142 + (i * 40));
+                lbl.Location = new Point(257, 275 + (i * 40));
                 Controls.Add(lbl);
 
                 ListOfCheckboxes.Add(box);
@@ -130,7 +135,8 @@ namespace FinalProject_MobileMowersCRM.Views
             {
                 listOfFirstNames.Add(customer.FirstName);
             }
-            DropDownCustomers.DataSource = listOfFirstNames;
+            var test = DropDownCustomers.DataSource = listOfCustomers;  
+            
 
         }
 
@@ -147,6 +153,69 @@ namespace FinalProject_MobileMowersCRM.Views
         private void AddUpdateInvoiceScreen_Load(object sender, EventArgs e)
         {
 
+        }
+
+        public void ClearFields()
+        {
+            foreach (var checkbox in ListOfCheckboxes)
+            {
+                checkbox.Checked = false;
+            }
+            CheckBoxHasPaid.Checked = false;
+        }
+
+        public void CleanUp()
+        {
+            ClearFields();
+            Hide();
+            _appController.LoadInvoiceScreen();
+        }
+
+        public void PopulateInvoice(Invoice invoice, List<ServiceToInvoice> listOfServiceToInvoices, Customer customer)
+        {
+            _currentCustomer = customer;
+            
+            foreach (var service in listOfServices)
+            {
+                foreach (var serviceToInvoice in listOfServiceToInvoices)
+                {
+                    if (serviceToInvoice.ServiceId == service.ServiceId)
+                    {
+                        SetCheckBox(service.ServiceName);
+                    }
+                }
+            }
+        }
+
+        public void SetCheckBox (string serviceName)
+        {
+            for (var i = 0; i < ListOfCheckboxes.Count; i++)
+            {
+                var checkbox = ListOfCheckboxes[i];
+                if (checkbox.Text == serviceName)
+                {
+                    checkbox.Checked = true;
+                }
+            }
+        }
+
+        private void DropDownCustomers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _selectedCustomerId = listOfCustomers[DropDownCustomers.SelectedIndex].CustomerID;
+            _currentCustomer = _appController.GetCustomerByCustomerId(_selectedCustomerId);
+            PopulateCustomerInfo();
+        }
+
+        public void PopulateCustomerInfo()
+        {
+            LblFullName.Text = _currentCustomer?.FirstName + " " + _currentCustomer.LastName;
+            LblPhone.Text = _currentCustomer?.PhoneNumber;
+            LblEmail.Text = _currentCustomer?.Email;
+            LblAddress1.Text = _currentCustomer?.Address1;
+            LblAddress2.Text = _currentCustomer?.Address2;
+            LblCity.Text = _currentCustomer?.City;
+            LblState.Text = _currentCustomer?.State;
+            LblAreaCode.Text = _currentCustomer.AreaCode.ToString();
         }
     }
 }

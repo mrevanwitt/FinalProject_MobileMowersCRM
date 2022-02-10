@@ -41,14 +41,20 @@ namespace FinalProject_MobileMowersCRM.Views
         private void BtnUpdateCustomer_Click(object sender, EventArgs e)
         {
             var customerId = DataGridViewCustomers.SelectedCells[0].EditedFormattedValue.ToString();
-            _appController.LoadCustomerScreenWithCustomerId(customerId);
+            _appController.LoadAddUpdateCustomerScreenWithCustomerId(customerId);
             Hide();
             
         }
 
         private void BtnDeleteCustomer_Click(object sender, EventArgs e)
         {
-
+            var customerId = DataGridViewCustomers.SelectedCells[0].EditedFormattedValue.ToString();
+            var customer = _appController.GetCustomerByCustomerId(Convert.ToInt32(customerId) );
+            var dialog = MessageBox.Show($"Are you sure you want to delete this Customer?", "Are you sure?", MessageBoxButtons.YesNo);
+            if (dialog == DialogResult.Yes)
+            {
+                _appController.DeleteCustomer(customer);
+            }
         }
     }
 }

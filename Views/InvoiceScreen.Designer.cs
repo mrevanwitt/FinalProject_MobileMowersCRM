@@ -38,10 +38,13 @@
             // 
             // DataGridViewInvoices
             // 
+            this.DataGridViewInvoices.AllowUserToDeleteRows = false;
             this.DataGridViewInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewInvoices.Location = new System.Drawing.Point(12, 77);
             this.DataGridViewInvoices.Name = "DataGridViewInvoices";
+            this.DataGridViewInvoices.RowHeadersVisible = false;
             this.DataGridViewInvoices.RowTemplate.Height = 25;
+            this.DataGridViewInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.DataGridViewInvoices.Size = new System.Drawing.Size(776, 297);
             this.DataGridViewInvoices.TabIndex = 2;
             // 
@@ -72,6 +75,7 @@
             this.BtnUpdateInvoice.TabIndex = 5;
             this.BtnUpdateInvoice.Text = "Update";
             this.BtnUpdateInvoice.UseVisualStyleBackColor = true;
+            this.BtnUpdateInvoice.Click += new System.EventHandler(this.BtnUpdateInvoice_Click);
             // 
             // BtnDashboard
             // 
