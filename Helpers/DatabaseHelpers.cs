@@ -57,10 +57,10 @@ namespace FinalProject_MobileMowersCRM.Helpers
             return SQLiteNetExtensions.Extensions.ReadOperations.GetAllWithChildren<Service>(db);
         }
 
-        public List<ServiceToInvoice> GetAllServicesByInvoiceId(int invoiceId)
+        public Task<List<ServiceToInvoice>> GetAllServicesByInvoiceId(int invoiceId)
         {
             string query = $"SELECT * FROM ServiceToInvoice WHERE InvoiceId = {invoiceId}";
-            return db.Query<ServiceToInvoice>(query).ToList();
+            return Task.FromResult(db.Query<ServiceToInvoice>(query).ToList());
         }
 
         #endregion

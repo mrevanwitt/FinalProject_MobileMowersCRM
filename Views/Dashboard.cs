@@ -42,5 +42,7 @@ namespace FinalProject_MobileMowersCRM
             Hide();
             _appController.LoadReportScreen();
         }
+
+
     }
 }

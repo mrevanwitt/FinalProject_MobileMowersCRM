@@ -17,11 +17,12 @@ namespace FinalProject_MobileMowersCRM.Views
         private int _selectedCustomerId;
         private bool _isUpdating;
         private Customer _currentCustomer;
+        private Invoice _currentInvoice;
 
         private List<Customer> listOfCustomers;
         private List<Service> listOfServices;
-        private List<CheckBox> ListOfCheckboxes;
-        private List<Label> ListOfLabels;
+        private List<CheckBox> listOfCheckboxes = new List<CheckBox>();
+        private List<Label> listOfLabels = new List<Label>();
         private int total;
 
         public AddUpdateInvoiceScreen(AppController appController)
@@ -54,7 +55,7 @@ namespace FinalProject_MobileMowersCRM.Views
             };
             _appController.AddNewInvoice(invoice);
 
-            foreach (var checkbox in ListOfCheckboxes)
+            foreach (var checkbox in listOfCheckboxes)
             {
                 if (checkbox.Checked)
                 {
@@ -105,37 +106,45 @@ namespace FinalProject_MobileMowersCRM.Views
         private void LoadComponents()
         {
             listOfServices = _appController.GetAllServices();
-            ListOfCheckboxes = new List<CheckBox>();
-            ListOfLabels = new List<Label>();
 
-            for (var i = 0; i < listOfServices.Count; i++)
+            if (listOfCheckboxes.Count == 0)
             {
-                var service = listOfServices[i];
-                var box = new CheckBox();
-                box.Text = service.ServiceName;
-                box.Tag = service.ServiceAmount;
-                box.AutoSize = true;
-                box.Location = new Point(33, 275 + (i * 40));
-                box.CheckedChanged += new EventHandler(CheckBox_Checked);
-                Controls.Add(box);
+                for (var i = 0; i < listOfServices.Count; i++)
+                {
+                    var service = listOfServices[i];
+                    var box = new CheckBox();
+                    box.Text = service.ServiceName;
+                    box.Tag = service.ServiceAmount;
+                    box.AutoSize = true;
+                    box.Location = new Point(33, 275 + (i * 40));
+                    box.CheckedChanged += new EventHandler(CheckBox_Checked);
+                    Controls.Add(box);
 
-                var lbl = new Label();
-                lbl.Text = DisplayAmount(service.ServiceAmount.ToString());
-                lbl.AutoSize = true;
-                lbl.Location = new Point(257, 275 + (i * 40));
-                Controls.Add(lbl);
+                    var lbl = new Label();
+                    lbl.Text = DisplayAmount(service.ServiceAmount.ToString());
+                    lbl.AutoSize = true;
+                    lbl.Location = new Point(257, 275 + (i * 40));
+                    Controls.Add(lbl);
 
-                ListOfCheckboxes.Add(box);
-                ListOfLabels.Add(lbl);
+                    listOfCheckboxes.Add(box);
+                    listOfLabels.Add(lbl);
+                }
             }
 
             listOfCustomers = _appController.GetAllCustomers().ToList();
-            var listOfFirstNames = new List<string>();
+            var listOfComboBoxes = new List<ComboItem>();
             foreach (var customer in listOfCustomers)
             {
-                listOfFirstNames.Add(customer.FirstName);
+                var comboItem = new ComboItem()
+                {
+                    Id = customer.CustomerID,
+                    FirstName = customer.FirstName
+                };
+                listOfComboBoxes.Add(comboItem);
             }
-            var test = DropDownCustomers.DataSource = listOfCustomers;  
+            DropDownCustomers.DataSource = listOfComboBoxes;
+            DropDownCustomers.DisplayMember = "FirstName";
+            DropDownCustomers.ValueMember = "Id";
             
 
         }
@@ -157,7 +166,7 @@ namespace FinalProject_MobileMowersCRM.Views
 
         public void ClearFields()
         {
-            foreach (var checkbox in ListOfCheckboxes)
+            foreach (var checkbox in listOfCheckboxes)
             {
                 checkbox.Checked = false;
             }
@@ -171,17 +180,19 @@ namespace FinalProject_MobileMowersCRM.Views
             _appController.LoadInvoiceScreen();
         }
 
-        public void PopulateInvoice(Invoice invoice, List<ServiceToInvoice> listOfServiceToInvoices, Customer customer)
+        public void PopulateInvoice(Invoice invoice, Task<List<ServiceToInvoice>> listOfServiceToInvoices, Customer customer)
         {
+            _currentInvoice = invoice;
             _currentCustomer = customer;
             
             foreach (var service in listOfServices)
             {
-                foreach (var serviceToInvoice in listOfServiceToInvoices)
+                foreach (var serviceToInvoice in listOfServiceToInvoices.Result)
                 {
                     if (serviceToInvoice.ServiceId == service.ServiceId)
                     {
                         SetCheckBox(service.ServiceName);
+                        break;
                     }
                 }
             }
@@ -189,12 +200,13 @@ namespace FinalProject_MobileMowersCRM.Views
 
         public void SetCheckBox (string serviceName)
         {
-            for (var i = 0; i < ListOfCheckboxes.Count; i++)
+            for (var i = 0; i < listOfCheckboxes.Count; i++)
             {
-                var checkbox = ListOfCheckboxes[i];
+                var checkbox = listOfCheckboxes[i];
                 if (checkbox.Text == serviceName)
                 {
                     checkbox.Checked = true;
+                    break;
                 }
             }
         }
@@ -216,6 +228,10 @@ namespace FinalProject_MobileMowersCRM.Views
             LblCity.Text = _currentCustomer?.City;
             LblState.Text = _currentCustomer?.State;
             LblAreaCode.Text = _currentCustomer.AreaCode.ToString();
+            if (_currentInvoice != null)
+            {
+                TextBoxDateCreated.Text = _currentInvoice.DateCreated;
+            }
         }
     }
 }

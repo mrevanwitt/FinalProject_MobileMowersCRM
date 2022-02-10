@@ -16,6 +16,7 @@ namespace FinalProject_MobileMowersCRM
         private readonly NavigationHelper navHelpers;
         private readonly DatabaseHelpers databaseHelpers;
 
+        private readonly LoginScreen loginScreen;
         private readonly Dashboard dashboard;
         private readonly CustomerScreen customerScreen;
         private readonly AddUpdateCustomerScreen addUpdateCustomerScreen;
@@ -38,7 +39,12 @@ namespace FinalProject_MobileMowersCRM
             reportScreen = new ReportScreen(this); 
 
             databaseHelpers.ConnectDatabase();
-            Application.Run(new Dashboard(this));
+            Application.Run(new LoginScreen(this));
+        }
+
+        public void Login()
+        {
+            dashboard.Show();        
         }
 
         public void LoadCustomerScreen()

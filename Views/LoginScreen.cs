@@ -12,9 +12,17 @@ namespace FinalProject_MobileMowersCRM.Views
 {
     public partial class LoginScreen : Form
     {
-        public LoginScreen()
+        private AppController _appController;
+        public LoginScreen(AppController appController)
         {
+            _appController = appController;
             InitializeComponent();
+        }
+
+        private void BtnLogin_Click(object sender, EventArgs e)
+        {
+            Hide();
+            _appController.Login();
         }
     }
 }
