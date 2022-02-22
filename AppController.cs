@@ -1,22 +1,25 @@
 ﻿using FinalProject_MobileMowersCRM.Helpers;
 using FinalProject_MobileMowersCRM.Models;
 using FinalProject_MobileMowersCRM.Views;
+using Microsoft.AspNet.Identity;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
+using System;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 namespace FinalProject_MobileMowersCRM
 {
    
     public class AppController
     {
-        private readonly NavigationHelper navHelpers;
         private readonly DatabaseHelpers databaseHelpers;
 
-        private readonly LoginScreen loginScreen;
         private readonly Dashboard dashboard;
         private readonly CustomerScreen customerScreen;
         private readonly AddUpdateCustomerScreen addUpdateCustomerScreen;
@@ -27,7 +30,6 @@ namespace FinalProject_MobileMowersCRM
 
         public AppController()
         {
-            navHelpers = new NavigationHelper();
             databaseHelpers = new DatabaseHelpers();
 
             dashboard = new Dashboard(this);
@@ -40,11 +42,6 @@ namespace FinalProject_MobileMowersCRM
 
             databaseHelpers.ConnectDatabase();
             Application.Run(new LoginScreen(this));
-        }
-
-        public void Login()
-        {
-            dashboard.Show();        
         }
 
         public void LoadCustomerScreen()
@@ -92,8 +89,7 @@ namespace FinalProject_MobileMowersCRM
 
         public void LoadAddUpdateInvoiceScreenWithInvoiceId(string invoiceId)
         {
-            var isUpdating = true;
-            addUpdateInvoiceScreen.Show(isUpdating);
+            //addUpdateInvoiceScreen.Show(isUpdating);
             var invoice = databaseHelpers.GetInvoiceById(Convert.ToInt32(invoiceId));
             var customer = databaseHelpers.GetCustomerById(invoice.CustomerId);
             var listOfInvoiceToServices = databaseHelpers.GetAllServicesByInvoiceId(Convert.ToInt32(invoiceId));
@@ -135,6 +131,10 @@ namespace FinalProject_MobileMowersCRM
             return databaseHelpers.GetAllCustomers();
         }
 
+        public List<Customer> GetCustomersBySearch(string searchText)
+        {
+            return databaseHelpers.GetCustomersBySearch(searchText).Result;
+        }
         public List<Service> GetAllServices()
         {
             return databaseHelpers.GetAllServices();
@@ -143,6 +143,73 @@ namespace FinalProject_MobileMowersCRM
         public List<Invoice> GetAllInvoices()
         {
             return databaseHelpers.GetAllInvoices();
+        }
+
+        public List<Invoice> GetAllUnpaidInvoices()
+        {
+            return databaseHelpers.GetAllUnpaidInvoices().Result;
+        }
+
+        public List<Invoice> GetAllPaidInvoices()
+        {
+            return databaseHelpers.GetAllPaidInvoices().Result;
+        }
+
+        public List<Invoice> GetAllInvoicesByCustomerId(int customerId)
+        {
+            return databaseHelpers.GetAllInvoicesByCustomerId(customerId).Result;
+        }
+
+        public bool validatePassword(string username, string password)
+        {
+            if (username == null || password == null)
+            {
+                return false;
+            }
+
+            var salt = databaseHelpers.GetSaltByUsername(username).ToString();
+
+            if (salt == string.Empty)
+            {
+                return false;
+            }
+
+            string hashedPassword = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: Convert.FromBase64String(salt),
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+            var storedPassword = databaseHelpers.GetPasswordByUsername(username).ToString();
+
+            if (hashedPassword == storedPassword)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        public void PasswordHash(string password)
+        {
+            // generate a 128-bit salt using a secure PRNG
+            byte[] salt = Convert.FromBase64String("salt");
+
+            // derive a 256-bit subkey (use HMACSHA1 with 10,000 iterations)
+            string hashed = Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: salt,
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+
+        }
+
+        public void CheckPassword(string password)
+        {
+            var hashedPassword = "";
+            var passwordVerififcationResult = new PasswordHasher<object?>().VerifyHashedPassword(null, hashedPassword, password);
         }
     }
 }

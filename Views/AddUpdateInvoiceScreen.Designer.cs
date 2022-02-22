@@ -115,6 +115,7 @@
             this.CheckBoxHasPaid.TabIndex = 34;
             this.CheckBoxHasPaid.Text = "Has Paid";
             this.CheckBoxHasPaid.UseVisualStyleBackColor = true;
+            this.CheckBoxHasPaid.CheckedChanged += new System.EventHandler(this.CheckBoxHasPaid_CheckedChanged);
             // 
             // TextBoxDateCreated
             // 

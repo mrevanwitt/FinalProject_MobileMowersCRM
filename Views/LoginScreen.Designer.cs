@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.BtnLogin = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.TextBoxUsername = new System.Windows.Forms.TextBox();
+            this.TextBoxPassword = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.SuspendLayout();
@@ -45,19 +45,22 @@
             this.BtnLogin.UseVisualStyleBackColor = true;
             this.BtnLogin.Click += new System.EventHandler(this.BtnLogin_Click);
             // 
-            // textBox1
+            // TextBoxUsername
             // 
-            this.textBox1.Location = new System.Drawing.Point(64, 28);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(100, 23);
-            this.textBox1.TabIndex = 22;
+            this.TextBoxUsername.Location = new System.Drawing.Point(64, 28);
+            this.TextBoxUsername.Name = "TextBoxUsername";
+            this.TextBoxUsername.Size = new System.Drawing.Size(100, 23);
+            this.TextBoxUsername.TabIndex = 22;
+            this.TextBoxUsername.Text = "admin";
             // 
-            // textBox2
+            // TextBoxPassword
             // 
-            this.textBox2.Location = new System.Drawing.Point(64, 97);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(100, 23);
-            this.textBox2.TabIndex = 23;
+            this.TextBoxPassword.Location = new System.Drawing.Point(64, 97);
+            this.TextBoxPassword.Name = "TextBoxPassword";
+            this.TextBoxPassword.PasswordChar = '*';
+            this.TextBoxPassword.Size = new System.Drawing.Size(100, 23);
+            this.TextBoxPassword.TabIndex = 23;
+            this.TextBoxPassword.Text = "Pa$$word!";
             // 
             // label1
             // 
@@ -84,8 +87,8 @@
             this.ClientSize = new System.Drawing.Size(224, 221);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.textBox2);
-            this.Controls.Add(this.textBox1);
+            this.Controls.Add(this.TextBoxPassword);
+            this.Controls.Add(this.TextBoxUsername);
             this.Controls.Add(this.BtnLogin);
             this.Name = "LoginScreen";
             this.Text = "LoginScreen";
@@ -97,8 +100,8 @@
         #endregion
 
         private Button BtnLogin;
-        private TextBox textBox1;
-        private TextBox textBox2;
+        private TextBox TextBoxUsername;
+        private TextBox TextBoxPassword;
         private Label label1;
         private Label label2;
     }

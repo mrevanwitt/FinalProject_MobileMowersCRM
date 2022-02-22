@@ -47,6 +47,12 @@ namespace FinalProject_MobileMowersCRM.Helpers
             return SQLiteNetExtensions.Extensions.ReadOperations.GetAllWithChildren<Customer>(db);
         }
 
+        public Task<List<Customer>> GetCustomersBySearch(string searchText)
+        {
+            string query = $"SELECT * FROM Customer WHERE Customer.FirstName like '%{searchText}%' OR Customer.LastName like '%{searchText}%'";
+            return Task.FromResult(db.Query<Customer>(query).ToList());
+        }
+
         #endregion
 
         #region Service
@@ -89,6 +95,54 @@ namespace FinalProject_MobileMowersCRM.Helpers
         public void AddServiceToInvoice(ServiceToInvoice serviceToInvoice)
         {
             db.Insert(serviceToInvoice);
+        }
+
+        #endregion
+
+        #region User
+
+        public string GetSaltByUsername(string username)
+        {
+            string query = $"SELECT Salt FROM User WHERE User.Username = '{username}'";
+            var result = db.QueryScalars<string>(query).FirstOrDefault();
+            if (result == null)
+            {
+                return string.Empty;
+            }
+            else
+            {
+                return result;
+            }
+
+        }
+
+        public string GetPasswordByUsername(string username)
+        {
+            string query = $"SELECT Password FROM User WHERE User.Username = '{username}'";
+            return db.QueryScalars<string>(query).FirstOrDefault();
+        }
+
+
+        #endregion
+
+        #region Reports
+
+        public Task<List<Invoice>> GetAllUnpaidInvoices()
+        {
+            var query = "SELECT * FROM Invoice WHERE HasPaid = 0";
+            return Task.FromResult(db.Query<Invoice>(query).ToList());
+        }
+
+        public Task<List<Invoice>> GetAllPaidInvoices()
+        {
+            var query = "SELECT * FROM Invoice WHERE HasPaid = 1";
+            return Task.FromResult(db.Query<Invoice>(query).ToList());
+        }
+
+        public Task<List<Invoice>> GetAllInvoicesByCustomerId(int customerId)
+        {
+            var query = $"SELECT * FROM Invoice WHERE Invoice.CustomerId = {customerId}";
+            return Task.FromResult(db.Query<Invoice>(query).ToList());
         }
 
         #endregion

@@ -30,6 +30,7 @@ namespace FinalProject_MobileMowersCRM.Views
         {
             Hide();
             _appController.LoadDashboard();
+            TextBoxSearchCustomer.Clear();
         }
 
         private void BtnAddNewCustomer_Click(object sender, EventArgs e)
@@ -54,7 +55,20 @@ namespace FinalProject_MobileMowersCRM.Views
             if (dialog == DialogResult.Yes)
             {
                 _appController.DeleteCustomer(customer);
+                DataGridViewCustomers.DataSource = _appController.GetAllCustomers();
             }
+
+        }
+
+        private void BtnSearchCustomer_Click(object sender, EventArgs e)
+        {
+            DataGridViewCustomers.DataSource = _appController.GetCustomersBySearch(TextBoxSearchCustomer.Text);
+        }
+
+        private void BtnResetSearch_Click(object sender, EventArgs e)
+        {
+            TextBoxSearchCustomer.Clear();
+            DataGridViewCustomers.DataSource = _appController.GetAllCustomers();
         }
     }
 }

@@ -18,6 +18,7 @@ namespace FinalProject_MobileMowersCRM.Views
         private bool _isUpdating;
         private Customer _currentCustomer;
         private Invoice _currentInvoice;
+        private bool HasLoadedForTheFirstTime = false;
 
         private List<Customer> listOfCustomers;
         private List<Service> listOfServices;
@@ -40,6 +41,14 @@ namespace FinalProject_MobileMowersCRM.Views
         {
             LoadComponents();
             _isUpdating = isUpdating;
+            if (_isUpdating)
+            {
+                BtnAddNewInvoice.Text = "Save";
+            }
+            else
+            {
+                BtnAddNewInvoice.Text = "Add";  
+            }
             Show();
         }
 
@@ -51,6 +60,7 @@ namespace FinalProject_MobileMowersCRM.Views
             {
                 InvoiceAmount = total,
                 CustomerId = _selectedCustomerId,
+                HasPaid = CheckBoxHasPaid.Checked,
                 DateCreated = DateTime.Now.ToString()
             };
             _appController.AddNewInvoice(invoice);
@@ -67,6 +77,8 @@ namespace FinalProject_MobileMowersCRM.Views
                     _appController.AddnewServiceToInvoice(serviceToInvoice);
                 }
             }
+            Hide();
+            _appController.LoadInvoiceScreen();
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -105,6 +117,7 @@ namespace FinalProject_MobileMowersCRM.Views
 
         private void LoadComponents()
         {
+
             listOfServices = _appController.GetAllServices();
 
             if (listOfCheckboxes.Count == 0)
@@ -132,21 +145,11 @@ namespace FinalProject_MobileMowersCRM.Views
             }
 
             listOfCustomers = _appController.GetAllCustomers().ToList();
-            var listOfComboBoxes = new List<ComboItem>();
-            foreach (var customer in listOfCustomers)
-            {
-                var comboItem = new ComboItem()
-                {
-                    Id = customer.CustomerID,
-                    FirstName = customer.FirstName
-                };
-                listOfComboBoxes.Add(comboItem);
-            }
-            DropDownCustomers.DataSource = listOfComboBoxes;
+            DropDownCustomers.DataSource = listOfCustomers;
             DropDownCustomers.DisplayMember = "FirstName";
-            DropDownCustomers.ValueMember = "Id";
+            DropDownCustomers.ValueMember = "CustomerID";
             
-
+            HasLoadedForTheFirstTime = true;
         }
 
         private string DisplayAmount(string value)
@@ -182,9 +185,20 @@ namespace FinalProject_MobileMowersCRM.Views
 
         public void PopulateInvoice(Invoice invoice, Task<List<ServiceToInvoice>> listOfServiceToInvoices, Customer customer)
         {
+            BtnAddNewInvoice.Text = "Save";
+            if (HasLoadedForTheFirstTime == false)
+            {
+                LoadComponents();
+            }
+            Show();
+            _isUpdating = true;
             _currentInvoice = invoice;
             _currentCustomer = customer;
-            
+
+            DropDownCustomers.SelectedValue = customer.CustomerID;
+
+            CheckBoxHasPaid.Checked = invoice.HasPaid;
+
             foreach (var service in listOfServices)
             {
                 foreach (var serviceToInvoice in listOfServiceToInvoices.Result)
@@ -220,18 +234,23 @@ namespace FinalProject_MobileMowersCRM.Views
 
         public void PopulateCustomerInfo()
         {
-            LblFullName.Text = _currentCustomer?.FirstName + " " + _currentCustomer.LastName;
+            LblFullName.Text = _currentCustomer?.FirstName + " " + _currentCustomer?.LastName;
             LblPhone.Text = _currentCustomer?.PhoneNumber;
             LblEmail.Text = _currentCustomer?.Email;
             LblAddress1.Text = _currentCustomer?.Address1;
             LblAddress2.Text = _currentCustomer?.Address2;
             LblCity.Text = _currentCustomer?.City;
             LblState.Text = _currentCustomer?.State;
-            LblAreaCode.Text = _currentCustomer.AreaCode.ToString();
+            LblAreaCode.Text = _currentCustomer?.AreaCode.ToString();
             if (_currentInvoice != null)
             {
                 TextBoxDateCreated.Text = _currentInvoice.DateCreated;
             }
+        }
+
+        private void CheckBoxHasPaid_CheckedChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

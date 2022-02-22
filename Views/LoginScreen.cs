@@ -21,8 +21,15 @@ namespace FinalProject_MobileMowersCRM.Views
 
         private void BtnLogin_Click(object sender, EventArgs e)
         {
-            Hide();
-            _appController.Login();
+            if (_appController.validatePassword(TextBoxUsername.Text, TextBoxPassword.Text))
+            {
+                Hide();
+                _appController.LoadDashboard();
+            }
+            else
+            {
+                MessageBox.Show("Invalid Username or Password");
+            }
         }
     }
 }
