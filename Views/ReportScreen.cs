@@ -28,8 +28,12 @@ namespace FinalProject_MobileMowersCRM.Views
 
         public new void Show()
         {
+            DataGridViewReports.DataSource = null;
             var listOfCustomers = _appController.GetAllCustomers().ToList();
-            firstCustomer = listOfCustomers[0];
+            if (listOfCustomers.Count > 0)
+            {
+                firstCustomer = listOfCustomers[0];
+            } 
             var listOfComboBoxes = new List<ComboItem>();
             foreach (var customer in listOfCustomers)
             {
@@ -44,7 +48,7 @@ namespace FinalProject_MobileMowersCRM.Views
             DropDownCustomerFirstNames.DisplayMember = "FirstName";
             DropDownCustomerFirstNames.ValueMember = "Id";
 
-            DropDownCustomerFirstNames.DataSource = _appController.GetAllCustomers();
+            //DropDownCustomerFirstNames.DataSource = _appController.GetAllCustomers() ;
 
             DropDownCustomerFirstNames.Hide();
 
@@ -78,10 +82,10 @@ namespace FinalProject_MobileMowersCRM.Views
 
         private void DropDownCustomerFirstNames_SelectedIndexChanged(object sender, EventArgs e)
         {
-            var selectedCustomer = DropDownCustomerFirstNames.SelectedItem as Customer;
+            var selectedCustomer = DropDownCustomerFirstNames.SelectedItem as ComboItem;
             if (selectedCustomer != null)
             {
-                DataGridViewReports.DataSource = _appController.GetAllInvoicesByCustomerId(selectedCustomer.CustomerID);
+                DataGridViewReports.DataSource = _appController.GetAllInvoicesByCustomerId(selectedCustomer.Id);
             }
         }
     }

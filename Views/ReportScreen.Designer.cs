@@ -39,11 +39,19 @@
             // 
             // DataGridViewReports
             // 
+            this.DataGridViewReports.AllowUserToAddRows = false;
+            this.DataGridViewReports.AllowUserToDeleteRows = false;
+            this.DataGridViewReports.AllowUserToResizeRows = false;
+            this.DataGridViewReports.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewReports.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewReports.Location = new System.Drawing.Point(12, 105);
+            this.DataGridViewReports.MultiSelect = false;
             this.DataGridViewReports.Name = "DataGridViewReports";
+            this.DataGridViewReports.ReadOnly = true;
+            this.DataGridViewReports.RowHeadersVisible = false;
             this.DataGridViewReports.RowTemplate.Height = 25;
-            this.DataGridViewReports.Size = new System.Drawing.Size(776, 269);
+            this.DataGridViewReports.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
+            this.DataGridViewReports.Size = new System.Drawing.Size(784, 297);
             this.DataGridViewReports.TabIndex = 9;
             // 
             // BtnDashboard
@@ -99,7 +107,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 387);
+            this.ClientSize = new System.Drawing.Size(806, 412);
             this.Controls.Add(this.DropDownCustomerFirstNames);
             this.Controls.Add(this.BtnAllUnpaidInvoices);
             this.Controls.Add(this.BtnAllInvoicesByCustomer);

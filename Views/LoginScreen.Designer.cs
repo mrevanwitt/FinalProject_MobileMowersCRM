@@ -91,7 +91,7 @@
             this.Controls.Add(this.TextBoxUsername);
             this.Controls.Add(this.BtnLogin);
             this.Name = "LoginScreen";
-            this.Text = "LoginScreen";
+            this.Text = "Login";
             this.ResumeLayout(false);
             this.PerformLayout();
 

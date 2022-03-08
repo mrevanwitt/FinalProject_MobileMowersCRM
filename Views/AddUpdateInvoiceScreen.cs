@@ -44,41 +44,83 @@ namespace FinalProject_MobileMowersCRM.Views
             if (_isUpdating)
             {
                 BtnAddNewInvoice.Text = "Save";
+                Text = "Update Invoice";
+                DropDownCustomers.SelectedItem = _currentCustomer;
             }
             else
             {
-                BtnAddNewInvoice.Text = "Add";  
+                BtnAddNewInvoice.Text = "Add";
+                Text = "Add new Invoice";
+                CheckBoxHasPaid.Enabled = false;
+                BtnAddNewInvoice.Enabled = false;
+                TextBoxDateCreated.Text = String.Empty;
+                TextBoxDatePaid.Text = String.Empty;
             }
             Show();
         }
 
         private void BtnAddNewInvoice_Click(object sender, EventArgs e)
         {
-            _selectedCustomerId = listOfCustomers[DropDownCustomers.SelectedIndex].CustomerID;
-
-            var invoice = new Invoice()
+            if (_isUpdating)
             {
-                InvoiceAmount = total,
-                CustomerId = _selectedCustomerId,
-                HasPaid = CheckBoxHasPaid.Checked,
-                DateCreated = DateTime.Now.ToString()
-            };
-            _appController.AddNewInvoice(invoice);
-
-            foreach (var checkbox in listOfCheckboxes)
-            {
-                if (checkbox.Checked)
+                var invoice = _currentInvoice;
+                if (CheckBoxHasPaid.Checked)
                 {
-                    var serviceToInvoice = new ServiceToInvoice()
+                    invoice.DatePaid = DateTime.Now.ToString();
+                    invoice.HasPaid = true;
+                }
+
+                invoice.CustomerId = _selectedCustomerId;
+                invoice.InvoiceAmount = total;
+
+                _appController.UpdateInvoice(invoice);
+                _appController.DeleteAllServiceToInvoicesByInvoiceId(_currentInvoice.InvoiceID);
+
+                foreach (var checkbox in listOfCheckboxes)
+                {
+                    if (checkbox.Checked)
                     {
-                        InvoiceId = invoice.InvoiceID,
-                        ServiceId = GetServiceId(checkbox.Text)
-                    };
-                    _appController.AddnewServiceToInvoice(serviceToInvoice);
+                        var serviceToInvoice = new ServiceToInvoice()
+                        {
+                            InvoiceId = invoice.InvoiceID,
+                            ServiceId = GetServiceId(checkbox.Text)
+                        };
+                        _appController.AddnewServiceToInvoice(serviceToInvoice);
+                    }
                 }
             }
+            else
+            {
+                var invoice = new Invoice()
+                {
+                    CustomerId = _selectedCustomerId,
+                    DateCreated = DateTime.Now.ToString(),
+                    HasPaid = CheckBoxHasPaid.Checked,
+                    InvoiceAmount = total
+                };
+                if (CheckBoxHasPaid.Checked)
+                {
+                    invoice.DatePaid = DateTime.Now.ToString();
+                }
+                _appController.AddNewInvoice(invoice);
+
+                foreach (var checkbox in listOfCheckboxes)
+                {
+                    if (checkbox.Checked)
+                    {
+                        var serviceToInvoice = new ServiceToInvoice()
+                        {
+                            InvoiceId = invoice.InvoiceID,
+                            ServiceId = GetServiceId(checkbox.Text)
+                        };
+                        _appController.AddnewServiceToInvoice(serviceToInvoice);
+                    }
+                }
+            }
+            CleanUp();
             Hide();
             _appController.LoadInvoiceScreen();
+
         }
 
         private void BtnCancel_Click(object sender, EventArgs e)
@@ -105,11 +147,21 @@ namespace FinalProject_MobileMowersCRM.Views
             CheckBox box = (CheckBox)sender;
             if (box.Checked)
             {
-                total += Convert.ToInt32(box.Tag);
+                total = _appController.AddToTotal(Convert.ToInt32(box.Tag), total);
             }
             else
             {
-                total -= Convert.ToInt32(box.Tag);
+                total = _appController.SubtractFromTotal(Convert.ToInt32(box.Tag), total);
+            }
+            if (total == 0)
+            {
+                CheckBoxHasPaid.Enabled = false;
+                BtnAddNewInvoice.Enabled = false;
+            } 
+            else
+            {
+                CheckBoxHasPaid.Enabled = true;
+                BtnAddNewInvoice.Enabled = true;
             }
             UpdateTotal();
         }
@@ -148,7 +200,9 @@ namespace FinalProject_MobileMowersCRM.Views
             DropDownCustomers.DataSource = listOfCustomers;
             DropDownCustomers.DisplayMember = "FirstName";
             DropDownCustomers.ValueMember = "CustomerID";
-            
+
+            LblWarningText.Text = "Checking this box will lock the Invoice. \n This cannot be undone";
+
             HasLoadedForTheFirstTime = true;
         }
 
@@ -172,8 +226,14 @@ namespace FinalProject_MobileMowersCRM.Views
             foreach (var checkbox in listOfCheckboxes)
             {
                 checkbox.Checked = false;
+                checkbox.Enabled = true;
             }
             CheckBoxHasPaid.Checked = false;
+            TextBoxDateCreated.Text = String.Empty;
+            TextBoxDatePaid.Text = String.Empty;
+            DropDownCustomers.Enabled = true;
+            BtnAddNewInvoice.Enabled = true;
+            CheckBoxHasPaid.Enabled = true;
         }
 
         public void CleanUp()
@@ -198,6 +258,7 @@ namespace FinalProject_MobileMowersCRM.Views
             DropDownCustomers.SelectedValue = customer.CustomerID;
 
             CheckBoxHasPaid.Checked = invoice.HasPaid;
+            TextBoxDateCreated.Text = invoice.DateCreated;
 
             foreach (var service in listOfServices)
             {
@@ -209,6 +270,17 @@ namespace FinalProject_MobileMowersCRM.Views
                         break;
                     }
                 }
+            }
+
+            if (invoice.HasPaid)
+            {
+                TextBoxDatePaid.Text = invoice.DatePaid;
+                LockInvoice();
+
+            } 
+            else
+            {
+                LblWarningText.Text = "Checking this box will lock the Invoice. \n This cannot be undone";
             }
         }
 
@@ -224,6 +296,7 @@ namespace FinalProject_MobileMowersCRM.Views
                 }
             }
         }
+
 
         private void DropDownCustomers_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -242,15 +315,26 @@ namespace FinalProject_MobileMowersCRM.Views
             LblCity.Text = _currentCustomer?.City;
             LblState.Text = _currentCustomer?.State;
             LblAreaCode.Text = _currentCustomer?.AreaCode.ToString();
-            if (_currentInvoice != null)
-            {
-                TextBoxDateCreated.Text = _currentInvoice.DateCreated;
-            }
         }
 
         private void CheckBoxHasPaid_CheckedChanged(object sender, EventArgs e)
         {
+            if (CheckBoxHasPaid.Checked)
+            {
+                LockInvoice();
+            }
+        }
 
+        private void LockInvoice()
+        {
+            DropDownCustomers.Enabled = false;
+            CheckBoxHasPaid.Enabled = false;
+            LblWarningText.Text = "This invoice is locked.";
+
+            foreach (var checkBox in listOfCheckboxes)
+            {
+                checkBox.Enabled = false;
+            }
         }
     }
 }

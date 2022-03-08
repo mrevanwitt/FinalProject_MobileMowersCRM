@@ -9,7 +9,7 @@ namespace FinalProject_MobileMowersCRM.Models
     public class Service
     {
         public int ServiceId { get; set; }
-        public string ServiceName { get; set; }
+        public string? ServiceName { get; set; }
         public int ServiceAmount { get; set; }
     }
 }

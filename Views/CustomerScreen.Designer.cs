@@ -81,27 +81,30 @@
             // 
             // DataGridViewCustomers
             // 
+            this.DataGridViewCustomers.AllowUserToAddRows = false;
             this.DataGridViewCustomers.AllowUserToDeleteRows = false;
+            this.DataGridViewCustomers.AllowUserToResizeRows = false;
+            this.DataGridViewCustomers.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewCustomers.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewCustomers.Location = new System.Drawing.Point(12, 63);
-            this.DataGridViewCustomers.MultiSelect = false;
             this.DataGridViewCustomers.Name = "DataGridViewCustomers";
+            this.DataGridViewCustomers.ReadOnly = true;
             this.DataGridViewCustomers.RowHeadersVisible = false;
             this.DataGridViewCustomers.RowTemplate.Height = 25;
             this.DataGridViewCustomers.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewCustomers.Size = new System.Drawing.Size(776, 314);
+            this.DataGridViewCustomers.Size = new System.Drawing.Size(1071, 314);
             this.DataGridViewCustomers.TabIndex = 7;
             // 
             // TextBoxSearchCustomer
             // 
-            this.TextBoxSearchCustomer.Location = new System.Drawing.Point(442, 12);
+            this.TextBoxSearchCustomer.Location = new System.Drawing.Point(737, 12);
             this.TextBoxSearchCustomer.Name = "TextBoxSearchCustomer";
             this.TextBoxSearchCustomer.Size = new System.Drawing.Size(184, 23);
             this.TextBoxSearchCustomer.TabIndex = 11;
             // 
             // BtnSearchCustomer
             // 
-            this.BtnSearchCustomer.Location = new System.Drawing.Point(632, 11);
+            this.BtnSearchCustomer.Location = new System.Drawing.Point(927, 11);
             this.BtnSearchCustomer.Name = "BtnSearchCustomer";
             this.BtnSearchCustomer.Size = new System.Drawing.Size(75, 23);
             this.BtnSearchCustomer.TabIndex = 12;
@@ -111,7 +114,7 @@
             // 
             // BtnResetSearch
             // 
-            this.BtnResetSearch.Location = new System.Drawing.Point(713, 12);
+            this.BtnResetSearch.Location = new System.Drawing.Point(1008, 12);
             this.BtnResetSearch.Name = "BtnResetSearch";
             this.BtnResetSearch.Size = new System.Drawing.Size(75, 23);
             this.BtnResetSearch.TabIndex = 13;
@@ -123,7 +126,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(1095, 450);
             this.Controls.Add(this.BtnResetSearch);
             this.Controls.Add(this.BtnSearchCustomer);
             this.Controls.Add(this.TextBoxSearchCustomer);

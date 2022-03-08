@@ -38,14 +38,19 @@
             // 
             // DataGridViewInvoices
             // 
+            this.DataGridViewInvoices.AllowUserToAddRows = false;
             this.DataGridViewInvoices.AllowUserToDeleteRows = false;
+            this.DataGridViewInvoices.AllowUserToResizeRows = false;
+            this.DataGridViewInvoices.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
             this.DataGridViewInvoices.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.DataGridViewInvoices.Location = new System.Drawing.Point(12, 77);
+            this.DataGridViewInvoices.MultiSelect = false;
             this.DataGridViewInvoices.Name = "DataGridViewInvoices";
+            this.DataGridViewInvoices.ReadOnly = true;
             this.DataGridViewInvoices.RowHeadersVisible = false;
             this.DataGridViewInvoices.RowTemplate.Height = 25;
             this.DataGridViewInvoices.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
-            this.DataGridViewInvoices.Size = new System.Drawing.Size(776, 297);
+            this.DataGridViewInvoices.Size = new System.Drawing.Size(784, 297);
             this.DataGridViewInvoices.TabIndex = 2;
             // 
             // BtnAddNewInvoice
@@ -66,6 +71,7 @@
             this.BtnDeleteInvoice.TabIndex = 6;
             this.BtnDeleteInvoice.Text = "Delete";
             this.BtnDeleteInvoice.UseVisualStyleBackColor = true;
+            this.BtnDeleteInvoice.Click += new System.EventHandler(this.BtnDeleteInvoice_Click);
             // 
             // BtnUpdateInvoice
             // 
@@ -91,7 +97,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(800, 450);
+            this.ClientSize = new System.Drawing.Size(808, 450);
             this.Controls.Add(this.BtnDeleteInvoice);
             this.Controls.Add(this.BtnUpdateInvoice);
             this.Controls.Add(this.BtnAddNewInvoice);

@@ -38,17 +38,15 @@ namespace FinalProject_MobileMowersCRM.Views
             if (isUpdating)
             {
                 BtnAddUpdateCustomer.Text = "Save";
-            } else
+                Text = "Update Customer";
+            } 
+            else
             {
                 BtnAddUpdateCustomer.Text = "Add";
+                Text = "Add New Customer";
             }
             Show();
         }
-
-        //protected override void OnShown(EventArgs e) 
-        //{ 
-        //    base.OnShown(e);
-        //}
 
         private void AddUpdateCustomerScreen_Load(object sender, EventArgs e)
         {
@@ -84,7 +82,6 @@ namespace FinalProject_MobileMowersCRM.Views
             }
             else
             {
-                SetTextBoxesRedIfEmpty();
                 MessageBox.Show("Plesae fill out the required feilds.");
             }
         }
@@ -125,18 +122,6 @@ namespace FinalProject_MobileMowersCRM.Views
             TxtBoxCity.Text = string.Empty;
             TxtBoxState.Text = string.Empty;
             TxtBoxAreaCode.Text = string.Empty;
-        }
-
-        public void SetTextBoxesRedIfEmpty()
-        {
-            if (TxtBoxFirstName.Text == string.Empty) TxtBoxFirstName.BackColor = Color.Red;
-            if (TxtBoxLastName.Text == string.Empty) TxtBoxLastName.BackColor = Color.Red;
-            if (TxtBoxPhone.Text == string.Empty) TxtBoxPhone.BackColor = Color.Red;
-            if (TxtBoxEmail.Text == string.Empty) TxtBoxEmail.BackColor = Color.Red;
-            if (TxtBoxAddress1.Text == string.Empty) TxtBoxAddress1.BackColor = Color.Red;
-            if (TxtBoxCity.Text == string.Empty) TxtBoxCity.BackColor = Color.Red;
-            if (TxtBoxState.Text == string.Empty) TxtBoxState.BackColor = Color.Red;
-            if (TxtBoxAreaCode.Text == string.Empty) TxtBoxAreaCode.BackColor = Color.Red;
         }
 
         private void TxtBoxFirstName_TextChanged(object sender, EventArgs e)

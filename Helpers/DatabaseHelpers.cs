@@ -36,7 +36,7 @@ namespace FinalProject_MobileMowersCRM.Helpers
             db.Delete(customer);
         }
 
-        public Customer GetCustomerById(int customerId)
+        public Customer GetCustomerByCustomerId(int customerId)
         {
             string query = $"SELECT * FROM Customer WHERE Customer.CustomerId = {customerId}";
             return db.Query<Customer>(query).FirstOrDefault();
@@ -78,7 +78,12 @@ namespace FinalProject_MobileMowersCRM.Helpers
             db.Insert(invoice);
         }
 
-        public Invoice GetInvoiceById(int invoiceId)
+        public void UpdateInvoice(Invoice invoice)
+        {
+            db.Update(invoice);
+        }
+
+        public Invoice GetInvoiceByInvoiceId(int invoiceId)
         {
             string query = $"SELECT * FROM Invoice WHERE Invoice.InvoiceId = {invoiceId}";
             return db.Query<Invoice>(query).FirstOrDefault();
@@ -88,6 +93,17 @@ namespace FinalProject_MobileMowersCRM.Helpers
         {
             return SQLiteNetExtensions.Extensions.ReadOperations.GetAllWithChildren<Invoice>(db);
         }
+
+        public void DeleteInvoice(Invoice invoice)
+        {
+            db.Delete(invoice);
+        }
+
+        public void DeleteInvoicesByCustomerId(int customerId)
+        {
+            var query = $"DELETE FROM Invoice WHERE Invoice.CustomerId = {customerId}";
+            db.Execute(query);
+        }
         #endregion
 
         #region Service To Invoice
@@ -95,6 +111,12 @@ namespace FinalProject_MobileMowersCRM.Helpers
         public void AddServiceToInvoice(ServiceToInvoice serviceToInvoice)
         {
             db.Insert(serviceToInvoice);
+        }
+
+        public void DeleteAllServiceToInvoicesByInvoiceId(int invoiceId)
+        {
+            string query = $"DELETE FROM ServiceToInvoice WHERE ServiceToInvoice.InvoiceId = {invoiceId}";
+            db.Execute(query);
         }
 
         #endregion

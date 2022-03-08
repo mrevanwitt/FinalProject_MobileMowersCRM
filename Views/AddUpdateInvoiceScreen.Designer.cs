@@ -47,6 +47,7 @@
             this.LblCity = new System.Windows.Forms.Label();
             this.LblState = new System.Windows.Forms.Label();
             this.LblAreaCode = new System.Windows.Forms.Label();
+            this.LblWarningText = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // DropDownCustomers
@@ -88,7 +89,7 @@
             // 
             // BtnAddNewInvoice
             // 
-            this.BtnAddNewInvoice.Location = new System.Drawing.Point(33, 751);
+            this.BtnAddNewInvoice.Location = new System.Drawing.Point(30, 773);
             this.BtnAddNewInvoice.Name = "BtnAddNewInvoice";
             this.BtnAddNewInvoice.Size = new System.Drawing.Size(122, 45);
             this.BtnAddNewInvoice.TabIndex = 32;
@@ -98,7 +99,7 @@
             // 
             // BtnCancel
             // 
-            this.BtnCancel.Location = new System.Drawing.Point(183, 751);
+            this.BtnCancel.Location = new System.Drawing.Point(180, 773);
             this.BtnCancel.Name = "BtnCancel";
             this.BtnCancel.Size = new System.Drawing.Size(122, 45);
             this.BtnCancel.TabIndex = 33;
@@ -225,11 +226,20 @@
             this.LblAreaCode.TabIndex = 46;
             this.LblAreaCode.Text = "Area Code";
             // 
+            // LblWarningText
+            // 
+            this.LblWarningText.AutoSize = true;
+            this.LblWarningText.Location = new System.Drawing.Point(30, 723);
+            this.LblWarningText.Name = "LblWarningText";
+            this.LblWarningText.Size = new System.Drawing.Size(0, 15);
+            this.LblWarningText.TabIndex = 48;
+            // 
             // AddUpdateInvoiceScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(330, 820);
+            this.ClientSize = new System.Drawing.Size(330, 841);
+            this.Controls.Add(this.LblWarningText);
             this.Controls.Add(this.LblAreaCode);
             this.Controls.Add(this.LblState);
             this.Controls.Add(this.LblCity);
@@ -297,5 +307,7 @@
         private Label LblState;
         private Label LblAreaCode;
         private Label LblFullName;
+        private Label label7;
+        private Label LblWarningText;
     }
 }

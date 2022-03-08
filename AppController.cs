@@ -58,7 +58,7 @@ namespace FinalProject_MobileMowersCRM
         {
             var isUpdating = true;
             addUpdateCustomerScreen.Show(isUpdating);
-            var customer = databaseHelpers.GetCustomerById(Convert.ToInt32(customerId));
+            var customer = databaseHelpers.GetCustomerByCustomerId(Convert.ToInt32(customerId));
             addUpdateCustomerScreen.PopulateCustomer(customer);
         }
 
@@ -90,8 +90,8 @@ namespace FinalProject_MobileMowersCRM
         public void LoadAddUpdateInvoiceScreenWithInvoiceId(string invoiceId)
         {
             //addUpdateInvoiceScreen.Show(isUpdating);
-            var invoice = databaseHelpers.GetInvoiceById(Convert.ToInt32(invoiceId));
-            var customer = databaseHelpers.GetCustomerById(invoice.CustomerId);
+            var invoice = databaseHelpers.GetInvoiceByInvoiceId(Convert.ToInt32(invoiceId));
+            var customer = databaseHelpers.GetCustomerByCustomerId(invoice.CustomerId);
             var listOfInvoiceToServices = databaseHelpers.GetAllServicesByInvoiceId(Convert.ToInt32(invoiceId));
             addUpdateInvoiceScreen.PopulateInvoice(invoice, listOfInvoiceToServices, customer);
         }
@@ -103,7 +103,7 @@ namespace FinalProject_MobileMowersCRM
 
         public Customer GetCustomerByCustomerId(int customerId)
         {
-            return databaseHelpers.GetCustomerById(customerId);
+            return databaseHelpers.GetCustomerByCustomerId(customerId);
         }
 
         public void UpdateCustomer(Customer customer)
@@ -121,9 +121,19 @@ namespace FinalProject_MobileMowersCRM
             databaseHelpers.AddInvoice(invoice);
         }
 
+        public void UpdateInvoice(Invoice invoice)
+        {
+            databaseHelpers.UpdateInvoice(invoice);
+        }
+
         public void AddnewServiceToInvoice(ServiceToInvoice serviceToInvoice)
         {
             databaseHelpers.AddServiceToInvoice(serviceToInvoice);
+        }
+
+        public void DeleteAllServiceToInvoicesByInvoiceId(int invoiceId)
+        {
+            databaseHelpers.DeleteAllServiceToInvoicesByInvoiceId(invoiceId);
         }
 
         public List<Customer> GetAllCustomers()
@@ -145,6 +155,21 @@ namespace FinalProject_MobileMowersCRM
             return databaseHelpers.GetAllInvoices();
         }
 
+        public Invoice GetInvoiceByInvoiceId(int invoiceId)
+        {
+            return databaseHelpers.GetInvoiceByInvoiceId(invoiceId);
+        }
+
+        public void DeleteInvoice(Invoice invoice)
+        {
+            databaseHelpers.DeleteInvoice(invoice);
+        }
+
+        public void DeleteInvoicesByCustomerId(int customerId)
+        {
+            databaseHelpers.DeleteInvoicesByCustomerId(customerId);
+        }
+
         public List<Invoice> GetAllUnpaidInvoices()
         {
             return databaseHelpers.GetAllUnpaidInvoices().Result;
@@ -158,6 +183,14 @@ namespace FinalProject_MobileMowersCRM
         public List<Invoice> GetAllInvoicesByCustomerId(int customerId)
         {
             return databaseHelpers.GetAllInvoicesByCustomerId(customerId).Result;
+        }
+
+        public List<Customer> GetCustomerFirstNames()
+        {
+            var listOfCustomers = GetAllCustomers().ToList();
+            var listOfComboBoxes = new List<ComboBox>();
+
+            return listOfCustomers;
         }
 
         public bool validatePassword(string username, string password)
@@ -210,6 +243,16 @@ namespace FinalProject_MobileMowersCRM
         {
             var hashedPassword = "";
             var passwordVerififcationResult = new PasswordHasher<object?>().VerifyHashedPassword(null, hashedPassword, password);
+        }
+
+        public int AddToTotal (int addedAmount, int total)
+        {
+            return total + addedAmount;
+        }
+
+        public int SubtractFromTotal (int subtractedAmount, int total)
+        {
+            return total - subtractedAmount;
         }
     }
 }

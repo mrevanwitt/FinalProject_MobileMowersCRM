@@ -39,8 +39,20 @@ namespace FinalProject_MobileMowersCRM
 
         private void BtnReportScreen_Click(object sender, EventArgs e)
         {
-            Hide();
-            _appController.LoadReportScreen();
+            var customerCount = _appController.GetAllCustomers().Count;
+            var invoiceCount = _appController.GetAllInvoices().Count;
+
+            if (customerCount == 0 || invoiceCount == 0)
+            {
+                MessageBox.Show("At least 1 customer and 1 invoice needs to be greated before reports be generated.");
+            } 
+            else
+            {
+                Hide();
+                _appController.LoadReportScreen();
+            }
+
+           
         }
 
 

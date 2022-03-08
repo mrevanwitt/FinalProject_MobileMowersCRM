@@ -20,6 +20,5 @@ namespace FinalProject_MobileMowersCRM.Models
         public string? City { get; set; }
         public string? State { get; set; }
         public int AreaCode { get; set; }
-
     }
 }

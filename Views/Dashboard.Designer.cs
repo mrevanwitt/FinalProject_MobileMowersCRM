@@ -29,7 +29,6 @@
         private void InitializeComponent()
         {
             this.BtnInvoices = new System.Windows.Forms.Button();
-            this.BtnServices = new System.Windows.Forms.Button();
             this.BtnReportScreen = new System.Windows.Forms.Button();
             this.BtnLoadCustomerScreen = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -44,19 +43,9 @@
             this.BtnInvoices.UseVisualStyleBackColor = true;
             this.BtnInvoices.Click += new System.EventHandler(this.BtnInvoices_Click);
             // 
-            // BtnServices
-            // 
-            this.BtnServices.Location = new System.Drawing.Point(76, 114);
-            this.BtnServices.Name = "BtnServices";
-            this.BtnServices.Size = new System.Drawing.Size(122, 45);
-            this.BtnServices.TabIndex = 2;
-            this.BtnServices.Text = "Services";
-            this.BtnServices.UseVisualStyleBackColor = true;
-            this.BtnServices.Click += new System.EventHandler(this.BtnServices_Click);
-            // 
             // BtnReportScreen
             // 
-            this.BtnReportScreen.Location = new System.Drawing.Point(76, 165);
+            this.BtnReportScreen.Location = new System.Drawing.Point(76, 114);
             this.BtnReportScreen.Name = "BtnReportScreen";
             this.BtnReportScreen.Size = new System.Drawing.Size(122, 45);
             this.BtnReportScreen.TabIndex = 3;
@@ -78,9 +67,8 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(770, 622);
+            this.ClientSize = new System.Drawing.Size(290, 209);
             this.Controls.Add(this.BtnReportScreen);
-            this.Controls.Add(this.BtnServices);
             this.Controls.Add(this.BtnInvoices);
             this.Controls.Add(this.BtnLoadCustomerScreen);
             this.Name = "Dashboard";
@@ -92,7 +80,6 @@
 
         #endregion
         private Button BtnInvoices;
-        private Button BtnServices;
         private Button BtnReportScreen;
         private Button BtnLoadCustomerScreen;
     }

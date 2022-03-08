@@ -48,6 +48,14 @@
             this.TxtBoxAreaCode = new System.Windows.Forms.TextBox();
             this.BtnAddUpdateCustomer = new System.Windows.Forms.Button();
             this.BtnCancel = new System.Windows.Forms.Button();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.label12 = new System.Windows.Forms.Label();
+            this.label13 = new System.Windows.Forms.Label();
+            this.label14 = new System.Windows.Forms.Label();
+            this.label15 = new System.Windows.Forms.Label();
+            this.label16 = new System.Windows.Forms.Label();
+            this.label17 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // TxtBoxFirstName
@@ -222,11 +230,107 @@
             this.BtnCancel.UseVisualStyleBackColor = true;
             this.BtnCancel.Click += new System.EventHandler(this.BtnCancel_Click);
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label10.Location = new System.Drawing.Point(12, 27);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(17, 21);
+            this.label10.TabIndex = 22;
+            this.label10.Text = "*";
+            this.label10.ForeColor = Color.Red;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label11.Location = new System.Drawing.Point(12, 78);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(17, 21);
+            this.label11.TabIndex = 23;
+            this.label11.Text = "*";
+            this.label11.ForeColor = Color.Red;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label12.Location = new System.Drawing.Point(12, 127);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(17, 21);
+            this.label12.TabIndex = 24;
+            this.label12.Text = "*";
+            this.label12.ForeColor = Color.Red;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label13.Location = new System.Drawing.Point(12, 176);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(17, 21);
+            this.label13.TabIndex = 25;
+            this.label13.Text = "*";
+            this.label13.ForeColor = Color.Red;
+            // 
+            // label14
+            // 
+            this.label14.AutoSize = true;
+            this.label14.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label14.Location = new System.Drawing.Point(12, 225);
+            this.label14.Name = "label14";
+            this.label14.Size = new System.Drawing.Size(17, 21);
+            this.label14.TabIndex = 26;
+            this.label14.Text = "*";
+            this.label14.ForeColor = Color.Red;
+            // 
+            // label15
+            // 
+            this.label15.AutoSize = true;
+            this.label15.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label15.Location = new System.Drawing.Point(12, 323);
+            this.label15.Name = "label15";
+            this.label15.Size = new System.Drawing.Size(17, 21);
+            this.label15.TabIndex = 27;
+            this.label15.Text = "*";
+            this.label15.ForeColor = Color.Red;
+            // 
+            // label16
+            // 
+            this.label16.AutoSize = true;
+            this.label16.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label16.Location = new System.Drawing.Point(12, 372);
+            this.label16.Name = "label16";
+            this.label16.Size = new System.Drawing.Size(17, 21);
+            this.label16.TabIndex = 28;
+            this.label16.Text = "*";
+            this.label16.ForeColor = Color.Red;
+            // 
+            // label17
+            // 
+            this.label17.AutoSize = true;
+            this.label17.Font = new System.Drawing.Font("Segoe UI", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
+            this.label17.Location = new System.Drawing.Point(12, 421);
+            this.label17.Name = "label17";
+            this.label17.Size = new System.Drawing.Size(17, 21);
+            this.label17.TabIndex = 29;
+            this.label17.Text = "*";
+            this.label17.ForeColor = Color.Red;
+            // 
             // AddUpdateCustomerScreen
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(282, 562);
+            this.Controls.Add(this.label17);
+            this.Controls.Add(this.label16);
+            this.Controls.Add(this.label15);
+            this.Controls.Add(this.label14);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
             this.Controls.Add(this.BtnCancel);
             this.Controls.Add(this.BtnAddUpdateCustomer);
             this.Controls.Add(this.label9);
@@ -277,5 +381,13 @@
         private TextBox TxtBoxAreaCode;
         private Button BtnAddUpdateCustomer;
         private Button BtnCancel;
+        private Label label10;
+        private Label label11;
+        private Label label12;
+        private Label label13;
+        private Label label14;
+        private Label label15;
+        private Label label16;
+        private Label label17;
     }
 }

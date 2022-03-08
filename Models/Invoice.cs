@@ -16,7 +16,7 @@ namespace FinalProject_MobileMowersCRM.Models
         public int CustomerId { get; set; }
         public decimal InvoiceAmount { get; set; }
         public bool HasPaid { get; set; }
-        public string DatePaid { get; set; }
-        public string DateCreated { get; set; }
+        public string? DatePaid { get; set; }
+        public string? DateCreated { get; set; }
     }
 }
