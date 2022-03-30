@@ -67,7 +67,7 @@ namespace FinalProject_MobileMowersCRM.Views
 
             if (attachedInnvoices.Count > 0)
             {
-                dialog = MessageBox.Show($"{customer.FirstName} is attached to {attachedInnvoices.Count} invoices. All of these invoices will be deleted. Do you want to proceed?", "Are you sure?", MessageBoxButtons.YesNo);
+                dialog = MessageBox.Show($"{customer.FirstName} {customer.LastName} is attached to {attachedInnvoices.Count} invoice(s). All of these invoices will be deleted. Do you want to proceed?", "Are you sure?", MessageBoxButtons.YesNo);
                 if (dialog == DialogResult.Yes)
                 {
                     _appController.DeleteInvoicesByCustomerId(Convert.ToInt32(customerId));

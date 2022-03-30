@@ -41,6 +41,7 @@ namespace FinalProject_MobileMowersCRM
             reportScreen = new ReportScreen(this); 
 
             databaseHelpers.ConnectDatabase();
+            CheckUserCount();
             Application.Run(new LoginScreen(this));
         }
 
@@ -224,6 +225,16 @@ namespace FinalProject_MobileMowersCRM
             return false;
         }
 
+        public string HashPassword(string password, string salt)
+        {
+            return Convert.ToBase64String(KeyDerivation.Pbkdf2(
+                password: password,
+                salt: Convert.FromBase64String(salt),
+                prf: KeyDerivationPrf.HMACSHA1,
+                iterationCount: 10000,
+                numBytesRequested: 256 / 8));
+        }
+
         public void PasswordHash(string password)
         {
             // generate a 128-bit salt using a secure PRNG
@@ -253,6 +264,20 @@ namespace FinalProject_MobileMowersCRM
         public int SubtractFromTotal (int subtractedAmount, int total)
         {
             return total - subtractedAmount;
+        }
+
+        public void CheckUserCount()
+        {
+            if (databaseHelpers.GetUserCount() == 0)
+            {
+                var user = new User()
+                {
+                    Username = "admin",
+                    Salt = "salt",
+                    Password = HashPassword("Pa$$word!", "salt")
+                };
+                databaseHelpers.AddTestUser(user);
+            }
         }
     }
 }

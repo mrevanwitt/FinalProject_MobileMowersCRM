@@ -29,25 +29,7 @@ namespace FinalProject_MobileMowersCRM.Views
         public new void Show()
         {
             DataGridViewReports.DataSource = null;
-            var listOfCustomers = _appController.GetAllCustomers().ToList();
-            if (listOfCustomers.Count > 0)
-            {
-                firstCustomer = listOfCustomers[0];
-            } 
-            var listOfComboBoxes = new List<ComboItem>();
-            foreach (var customer in listOfCustomers)
-            {
-                var comboItem = new ComboItem()
-                {
-                    Id = customer.CustomerID,
-                    FirstName = customer.FirstName
-                };
-                listOfComboBoxes.Add(comboItem);
-            }
-            DropDownCustomerFirstNames.DataSource = listOfComboBoxes;
-            DropDownCustomerFirstNames.DisplayMember = "FirstName";
-            DropDownCustomerFirstNames.ValueMember = "Id";
-
+            
             //DropDownCustomerFirstNames.DataSource = _appController.GetAllCustomers() ;
 
             DropDownCustomerFirstNames.Hide();
@@ -75,6 +57,25 @@ namespace FinalProject_MobileMowersCRM.Views
 
         private void BtnAllInvoicesByCustomer_Click(object sender, EventArgs e)
         {
+            var listOfCustomers = _appController.GetAllCustomers().ToList();
+            if (listOfCustomers.Count > 0)
+            {
+                firstCustomer = listOfCustomers[0];
+            }
+            var listOfComboBoxes = new List<ComboItem>();
+            foreach (var customer in listOfCustomers)
+            {
+                var comboItem = new ComboItem()
+                {
+                    Id = customer.CustomerID,
+                    FirstName = customer.FirstName
+                };
+                listOfComboBoxes.Add(comboItem);
+            }
+            DropDownCustomerFirstNames.DataSource = listOfComboBoxes;
+            DropDownCustomerFirstNames.DisplayMember = "FirstName";
+            DropDownCustomerFirstNames.ValueMember = "Id";
+
             DataGridViewReports.DataSource = _appController.GetAllInvoicesByCustomerId(firstCustomer.CustomerID);
             DropDownCustomerFirstNames.SelectedIndex = 0;
             DropDownCustomerFirstNames.Show();

@@ -173,12 +173,10 @@ namespace FinalProject_MobileMowersCRM.Views
         {
             if (textBox.Text == string.Empty)
             {
-                textBox.BackColor = Color.Red;
                 return false;
             }
             else
             {
-                textBox.BackColor = Color.White;
                 return true;
             }
         }

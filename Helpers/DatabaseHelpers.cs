@@ -16,7 +16,7 @@ namespace FinalProject_MobileMowersCRM.Helpers
         public void ConnectDatabase()
         {
             db = new SQLiteConnection("Data Source=AppData.db");
-            db.CreateTables<Customer, Invoice, Service, ServiceToInvoice>();            
+            db.CreateTables<Customer, Invoice, Service, ServiceToInvoice, User>();
         }
 
         #region Customer
@@ -135,7 +135,17 @@ namespace FinalProject_MobileMowersCRM.Helpers
             {
                 return result;
             }
+        }
 
+        public int GetUserCount()
+        {
+            var count = SQLiteNetExtensions.Extensions.ReadOperations.GetAllWithChildren<User>(db).Count;
+            return count;
+        }
+
+        public void AddTestUser(User user)
+        {
+            db.Insert(user);
         }
 
         public string GetPasswordByUsername(string username)
@@ -166,6 +176,7 @@ namespace FinalProject_MobileMowersCRM.Helpers
             var query = $"SELECT * FROM Invoice WHERE Invoice.CustomerId = {customerId}";
             return Task.FromResult(db.Query<Invoice>(query).ToList());
         }
+
 
         #endregion
     }
